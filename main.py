@@ -1,3 +1,4 @@
-a = [1,2,3,4]
-a[-1]=2
+import snip
+
+a = snip.twoD(4,4,0)
 print(a)
