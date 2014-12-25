@@ -1,0 +1,64 @@
+<class name="name">
+	<!-- name of the previous class. eg Raven's would be 'shinobi' or 'chaser'-->
+	<superClass>None</superClass>
+	<!--0 for base class, 1 for 1st specialization, 2 for 2nd specialization-->
+	<classLevel>0</classLevel>
+	<!--number of rows in this class's skill table-->
+	<numRows></numRows>
+	<!--number of columns in this class's skill table-->
+	<numCols></numCols>
+	<skill name="example_skill_with_comments">
+		<!--the row and column use programming indexes. so starting from '0'-->
+		<!--the row the skill is in-->
+		<row>4</row>
+		<!--the column the skill is in-->
+		<column>0</column>
+		<!--defaults to false-->
+		<isUlt>true</isUlt>
+		<!--use {n} for variables-->
+		<skillDesc>This skill is awesome\n{0}%+{1} damage</skillDesc>
+		<!--either an integer or '0' if unbounded-->
+		<levelLimit></levelLimit>
+		<!---->
+		<requiredWeapon></requiredWeapon>
+		<!--f-->
+		<feeMP>3.14</feeMP>
+		<!--give class:row:column:reqLevel separated by commas-->
+		<requiredSkills>0:1:1:1,0:1:2:1</requiredSkills>
+		<!--passive,active,buff,debuff,etc-->
+		<skillType></skillType>
+		<!--defaults to 0 if left out-->
+		<startRanks></startRanks>
+		<!--SP defaults to 3 for the buy-in and 1/level afterwards-->
+		<buyInCost>1</buyInCost>
+		<!--the remaining attributes are list-type attributes. lists like 1,2,3,4,...-->
+		<!--if the series ends before the max number of ranks the last listed value is used for the rest-->
+		<var id="0">50,55,60,65,70,80</var>
+		<var id="1">20,100,250,400,700,1200</var>
+		<!--defauts to no duration-->
+		<duration>2</duration>
+		<!--defauts to no cooldown-->
+		<cooldown>30,30,25,25,20</cooldown>
+		<!--reqLevel is special. the rest of the series will be extrapolated off of just 2 numbers.-->
+		<!--meaning levelLimit must be set if there is one-->
+		<reqLevel>11,21,31,41,51,61</reqLevel>
+	</skill>
+	<skill name="example_skill_without_comments">
+		<row>4</row>
+		<column>0</column>
+		<isUlt>true</isUlt>
+		<skillDesc>This skill is awesome\n{0}%+{1} damage</skillDesc>
+		<levelLimit></levelLimit>
+		<requiredWeapon></requiredWeapon>
+		<feeMP>3.14</feeMP>
+		<requiredSkills>2:0:4:6</requiredSkills>
+		<skillType></skillType>
+		<startRanks></startRanks>
+		<buyInCost>1</buyInCost>
+		<reqLevel>11,21,31,41,51,61</reqLevel>
+		<var id="0">50,55,60,65,70,80</var>
+		<var id="1">20,100,250,400,700,1200</var>
+		<duration>2</duration>
+		<cooldown>30,30,25,25,20</cooldown>
+	</skill>
+</class>
