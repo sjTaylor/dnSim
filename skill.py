@@ -1,80 +1,101 @@
 class Skill:
 	"""The class used for holding, and processing, the data for skills"""
-	name = "filler_name"
-	row = 0
-	col = 0
-	duration = None
-	cooldown = None
-	reqLevel = None
-	buyInCost = 3
-	startRanks = 0
-	numRanks = 0
-	limit = 1
-	isUlt = False
-	desc = "filler \\nskill name"
-	requiredSkills = []
-	requiredLevel = []
-	vars = []
-	numRanks = 0
-	def __init__(root):
+	
+	def __init__(self, root):
+		self.name = "filler_name"
+		self.row = 0
+		self.col = 0
+		self.duration = None
+		self.cooldown = None
+		self.reqLevel = None
+		self.buyInCost = 3
+		self.startRanks = 0
+		self.numRanks = 0
+		self.limit = 1
+		self.isUlt = False
+		self.desc = "filler \\nskill name"
+		self.requiredSkills = []
+		self.requiredLevel = []
+		self.vars = dict()
+		self.numRanks = 0
 		if 'dataVersion' in root.attrib:
 			temp = root.attrib['dataVersion']
-			if temp == '1'
-				initV1(root)
+			if temp == '1':
+				self.initV1(root)
 		else:
-			initV1(root)
-	def initV1(root):
+			self.initV1(root)
+	def getDesc(self):
+		if self.numRanks >= 1:
+			s1 = self.getText(self.desc,self.vars,self.numRanks-1)
+			s2 = self.getText(self.desc,self.vars,self.numRanks)
+		else:
+			s1 = self.getText(self.desc,self.vars,self.numRanks)
+			s2 = self.getText(self.desc,self.vars,self.numRanks+1)
+		
+		if s1 != s2:
+			return s1 + '\n' + '-'*15 + '\n' + s2
+		return s1
+	def initV1(self, root):
 		attr = root.attrib
-		row = int(attr['row'])
-		col = int(attr['col'])
-		name = attr['name']
-		limit = int(attr['limit'])
-		desc = root.find('desc')
-		for x in root.findall('var'):
-			var[root.attrib['id']
+		self.row = int(attr['row'])
+		self.col = int(attr['col'])
+		self.name = attr['name']
+		self.limit = int(attr['limit'])
+		self.desc = root.find('desc').text
+		
 		if 'isUlt' in attr:
-			isUlt = attr['isUlt'] == 'True'
+			self.isUlt = attr['isUlt'] == 'True'
 		if 'startRanks' in attr:
-			startRanks = int(attr['startRanks'])
+			self.startRanks = int(attr['startRanks'])
 		if 'buyInCost' in attr:
-			buyInCost = int(attr['buyInCost'])
+			self.buyInCost = int(attr['buyInCost'])
 		if root.find('duration') is not None:
-			duration = VarList(root.find('duration'))
+			self.duration = VarList(root.find('duration'))
 		if root.find('cooldown') is not None:
-			cooldown = VarList(root.find('cooldown'))
+			self.cooldown = VarList(root.find('cooldown'))
 		
-		
-	def getText(string,vars):
-	def rankUp():
-		numRanks = min(limit,numRanks+1)
-	def rankDown():
-		numRanks = max(startRanks,numRanks-1)
-	def getReqLevel():
-		return reqLevel[numRanks]
+		for x in root.findall('var'):
+			self.vars[x.attrib['id']] = VarList(x)
+			
+	def getText(self, string, vars, level):
+		while string.find('{') >= 0:
+			start = string.find('{')
+			end = string.find('}')
+			string = string[0:start] + vars[string[start+1:end]][level] + string[end+1:]
+		string = string.replace("\\n","\n")
+		return string
+	def rankUp(self):
+		self.numRanks = min(self.limit,self.numRanks+1)
+	def rankDown(self):
+		self.numRanks = max(self.startRanks,self.numRanks-1)
+	def getReqLevel(self):
+		return self.reqLevel[self.numRanks]
 
 class VarList:
-	isPredictive = False
-	vals = []
-	def __init__(node):
-		for q in node.text.split(','):
-			vals.append(int(q))
+	def __init__(self, node, type='nope'):
+		self.predict = False
+		self.vals = []
 		if 'type' in node.attrib:
-			isPredictive = node.attrib['type'] == 'predict'
-	#to help accomodate things like duration that are automatically predictive
-	def __init(node, type)
-		__init__(node)
-		isPredictive = type == 'predict'
-	def __getItem__(obj, dex):
-		if len(vals) is 0:
+			self.predict = node.attrib['type'] == 'yes'
+		else:
+			self.predict = type == 'yes'
+		if self.predict:
+			for q in node.text.split(','):
+				self.vals.append(int(q))
+		else:
+			for q in node.text.split(','):
+				self.vals.append(q)
+	def __getitem__(self, dex):
+		if len(self.vals) is 0:
 			return None
-		if isPredictive:
-			return getPredictedVal(vals,index)
-		return getCutoffVal(vals,index)
-	def getCutoffVal(nums, index):
-		if len(nums) >= index:
+		if self.predict:
+			return self.getPredictedVal(self.vals,dex)
+		return self.getCutoffVal(self.vals,dex)
+	def getCutoffVal(self, nums, index):
+		if len(nums) <= index:
 			return nums[-1]
 		return nums[index]
-	def getPredictedVal(nums, index):
+	def getPredictedVal(self, nums, index):
 		if index < len(nums):
 			return nums[index]
 		perLevel = nums[-2] - nums[-1]
