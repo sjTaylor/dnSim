@@ -1,9 +1,7 @@
 import snip
 import xml.etree.ElementTree as ET
-tree = ET.parse('test.xml')
+tree = ET.parse('./data/NA/assassin.xml')
 root = tree.getroot()
-
-for country in root.findall('country'):
-   rank = country.find('rank').text
-   name = country.get('name')
-   print(name, rank)
+skill = root[16]
+if skill.find('duration') is not None:
+	print('it worked')
