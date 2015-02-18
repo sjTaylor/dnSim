@@ -47,6 +47,7 @@ class Skill:
 			self.isUlt = attr['isUlt'] == 'True'
 		if 'startRanks' in attr:
 			self.startRanks = int(attr['startRanks'])
+			self.numRanks=self.startRanks
 		if 'buyInCost' in attr:
 			self.buyInCost = int(attr['buyInCost'])
 		if root.find('duration') is not None:
@@ -57,6 +58,10 @@ class Skill:
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
 			
+	def minimize(self):
+		self.numRanks = self.startRanks
+	def maximize(self):
+		self.numRanks = limit
 	def getText(self, string, vars, level):
 		while string.find('{') >= 0:
 			start = string.find('{')
