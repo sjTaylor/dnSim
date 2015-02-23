@@ -1,21 +1,22 @@
-try:
-    # for Python2
-    from Tkinter import *
-except ImportError:
-    # for Python3
-    from tkinter import *
+from tkinter import *
+
+
+counter = 0
+
+def update():
+    global counter
+    counter = counter + 1
+    menu.entryconfig(0, label=str(counter))
+
 root = Tk()
 
-def key(event):
-    print ("Keycode:", event.keycode, "State:", event.state)
+menubar = Menu(root)
 
-def callback(event):
-    frame.focus_set()
-    print ("clicked at", event.x, event.y)
+menu = Menu(menubar, tearoff=0, postcommand=update)
+menu.add_command(label=str(counter))
+menu.add_command(label="Exit", command=root.quit)
 
-frame = Frame(root, width=100, height=100)
-frame.bind("<Key>", key)
-frame.bind("<Button-1>", callback)
-frame.pack()
+menubar.add_cascade(label="Test", menu=menu)
 
+root.config(menu=menubar)
 root.mainloop()

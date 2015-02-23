@@ -4,7 +4,7 @@
 		<reqLevel>1,4,7</reqLevel>
 		<var id="0">121,125,128,131,135,150,153,156,159,163,178,181,184,188,191,206,209,213,216,219,234,238,241,244,247,263,266,269</var>
 		<var id="1">4,8,17,24,37,72,87,122,324,370,504,1275,1529,1813,3764,5608,6316,7037,7769,8514,10944,11919,12970,14109,15341,19236,20901,22706</var>
-		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
+		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
 		<cooldown>6</cooldown>
 	</skill>
 	<skill name="Piercing Star" row="0" col="1" startRanks="1" buyInCost="0" limit="27">
@@ -12,7 +12,7 @@
 		<reqLevel>1,4,7</reqLevel>
 		<var id="0">201,206,211,215,220,257,262,267,271,276,314,318,323,327,332,370,374,379,383,388,426,430,435,440,444,449,453,458</var>
 		<var id="1">4,9,19,27,41,80,97,135,360,411,560,1417,1699,2015,4182,6231,7017,7819,8632,9460,12160,13243,14412,15677,17045,18523,20121,21852</var>
-		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
+		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
 		<cooldown>8</cooldown>
 	</skill>
 	<skill name="Gore Kick" row="0" col="2" startRanks="1" buyInCost="0" limit="1">
@@ -26,8 +26,8 @@
 	<skill name="Dirty Trick" row="1" col="0" startRanks="1" buyInCost="0" limit="27">
 		<desc>Throw dirt to blind the enemy. then jump forward and strike the enemy down. Press regular attack while throwing dirt to activate this skill.\nPhysical Attack {0}%+{1}\n\n{2}</desc>
 		<reqLevel>1,4,7</reqLevel>
-		<var id="0">221,227,232,237,242,283,288,293,298,303,345,350,355,360,365,407,412,417,422,427</var>
-		<var id="1">4,10,20,30,45,88,106,149,396,452,616,1558,1868,2216,4600,6854,7719,8600,9495,10406</var>
+		<var id="0">221,227,232,237,242,283,288,293,298,303,448,455,462,468,475,529,535,542,548,555,609,615,622,629,635,642,648,655</var>
+		<var id="1">4,10,20,30,45,88,106,149,396,452,801,2026,2429,2881,5980,8910,10035,11180,12344,13525,17389,18938,20609,22418,24375,26488,28773,31248</var>
 		<var id="2">(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),Push enemies back when striking them down.\nAdditional damage: 25%</var>
 		<cooldown>10</cooldown>
 	</skill>
@@ -114,6 +114,7 @@
 	<skill name="Health Bolster" row="4" col="2" buyInCost="1" limit="7">
 		<desc>Increases max HP by {0}%.</desc>
 		<reqLevel>20,30</reqLevel>
+		<var id="0">2,4,6,8,10,12,14</var>
 	</skill>
 	<skill name="Attuned Mind" row="4" col="3" buyInCost="1" limit="6">
 		<desc>Increases your MP recovery by {0}% every minute.</desc>
@@ -122,29 +123,3 @@
 		<var id="0">1.5,3,4.5,6,7.5,9,10.5</var>
 	</skill>
 </class>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
