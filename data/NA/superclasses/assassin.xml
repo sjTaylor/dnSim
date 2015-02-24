@@ -31,7 +31,7 @@
 		<var id="2">(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),(The effect is inhanced at skill lv. 6.),Push enemies back when striking them down.\nAdditional damage: 25%</var>
 		<cooldown>10</cooldown>
 	</skill>
-	<skill name="Gore Slam" row="1" col="1" limit="1">
+	<skill name="Gore Slam" row="1" col="1" limit="1" buyInCost='1'>
 		<desc>Press special attack while jumping to strike down with a roundhouse kick.\nPhysical Damage: 198%</desc>
 		<reqLevel>4</reqLevel>
 		<cooldown>6</cooldown>

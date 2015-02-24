@@ -57,7 +57,6 @@ class Skill:
 		
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
-			
 	def minimize(self):
 		self.numRanks = self.startRanks
 	def maximize(self):
@@ -75,6 +74,12 @@ class Skill:
 		self.numRanks = max(self.startRanks,self.numRanks-1)
 	def getReqLevel(self):
 		return self.reqLevel[self.numRanks]
+	def sp(self):
+		if self.numRanks > 0:
+			if self.numRanks > 1:
+				return self.buyInCost + self.numRanks - 1
+			return self.buyInCost
+		return 0
 
 class VarList:
 	def __init__(self, node, type='nope'):

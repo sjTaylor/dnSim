@@ -13,18 +13,18 @@ import os
 root = TK.Tk()
 root.title('Dn Sim: a Dragon Nest skill simulator.')
 
-#skill description frame
-descPane = FR.SkillDescFrame(root)
-descPane.grid(column=2,row=0)
-
-#data stuffs
-baseData = ET.parse('./data/NA/assassin.xml').getroot()
-classFrames = []
-classFrames.append(FR.SkillButtonFrame(root,baseData,descPane))
-classFrames[0].grid(column=1,row=0)
-
 #control frame
 controlFrame = FR.ControlFrame(root)
-controlFrame.grid(column=0,row=0)
+controlFrame.grid(column=0,row=0,sticky=TK.N+TK.W+TK.E)
+
+#frame for skill boxes
+skillFrame = TK.Frame(root)
+skillFrame.grid(column=1,row=0)
+controlFrame.skillFrame=skillFrame
+
+#skill description frame
+descPane = FR.SkillDescFrame(root,controlFrame)
+descPane.grid(column=2,row=0)
+controlFrame.dpane=descPane
 
 root.mainloop()
