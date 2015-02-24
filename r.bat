@@ -1,1 +1,2 @@
-START /B python main.py &
+START pythonw main.py
+exit
