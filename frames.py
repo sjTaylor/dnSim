@@ -41,13 +41,11 @@ class ControlFrame(ttk.Frame):
 		dir = './data/' + self.serverVar.get()
 		temp = []
 		for x in os.listdir(dir):
-			#print(dir +'/'+ x)
 			if os.path.isfile(dir +'/'+ x):
 				temp.append(x)
 		self.classDropdown['menu'].delete(0,'end')
 		for s in temp:
 			self.classDropdown['menu'].add_command(label=s,command=TK._setit(self.classVar,s))
-		#print(temp)
 	def classchange(self,arg1,arg2,arg3):
 		self.dpane.switch=False
 		while len(self.pages) > 0:
@@ -80,8 +78,9 @@ class ControlFrame(ttk.Frame):
 		
 class SkillDescFrame(ttk.Label):
 	def __init__(self,master,ccframe):
-		TK.Label.__init__(self,master,text="filler",width=40,
-							justify=TK.LEFT,wraplength=275,
+		self.w=35
+		TK.Label.__init__(self,master,text="filler",width=self.w,
+							justify=TK.LEFT,wraplength=self.w*7,
 							anchor=TK.NW,bg='white')
 		self.switch=False
 		self.cframe=ccframe
@@ -104,9 +103,8 @@ class SkillButtonFrame(ttk.Frame):
 			self.skills[r][c]=SkillButton(self,dpane,i)
 		for r in range(0,len(self.skills)):
 			for c in range(0,len(self.skills[r])):
-				if self.skills[r][c] == None:
-					self.skills[r][c]=SkillButton(self)
-				self.skills[r][c].grid(column=c,row=r,padx=1*5,pady=1*5)
+				if self.skills[r][c] != None:
+					self.skills[r][c].grid(column=c,row=r,padx=1*5,pady=1*5)
 		self.superclass=xmlroot.attrib['superclass']
 		self.classname=xmlroot.attrib['name']
 		self.classLevel=int(xmlroot.attrib['classLevel'])
@@ -114,7 +112,8 @@ class SkillButtonFrame(ttk.Frame):
 		total = 0
 		for x in self.skills:
 			for y in x:
-				total += y.sp()
+				if y != None:
+					total += y.sp()
 		return total
 		
 class SkillButton(ttk.Button):
@@ -124,8 +123,7 @@ class SkillButton(ttk.Button):
 	'''
 	def __init__(self, master,dpane=None,sk=None):
 		TK.Button.__init__(self,master,command=None,
-							width=8,height=4,wraplength=60)#,
-							#background='cyan')
+							width=8,height=4,wraplength=60)
 		if sk == None:
 			self.skill=None
 			self.configure(text=".")

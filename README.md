@@ -29,3 +29,7 @@ TODO:
 [ ]improve description box (cooldown, reqLevel, etc)
 
 [ ]add importing feature
+
+[ ]make shift-clicking max/min the number of ranks
+
+[ ]improve skill description window to include name, cooldown,etc
