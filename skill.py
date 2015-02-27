@@ -60,7 +60,7 @@ class Skill:
 	def minimize(self):
 		self.numRanks = self.startRanks
 	def maximize(self):
-		self.numRanks = limit
+		self.numRanks = self.limit
 	def getText(self, string, vars, level):
 		while string.find('{') >= 0:
 			start = string.find('{')
@@ -108,6 +108,6 @@ class VarList:
 	def getPredictedVal(self, nums, index):
 		if index < len(nums):
 			return nums[index]
-		perLevel = nums[-2] - nums[-1]
+		perLevel = nums[-1] - nums[-2]
 		diff = index - len(nums)
 		return nums[-1] + perLevel*diff

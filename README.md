@@ -16,7 +16,7 @@ TODO:
 
 [X]add in sp counting
 
-[ ]add in an option for a pages instead of wide mode
+[X]add in an option for pages instead of wide mode
 
 [X]add in sp caps for lvl 80
 
@@ -30,6 +30,6 @@ TODO:
 
 [ ]add importing feature
 
-[ ]make shift-clicking max/min the number of ranks
+[X]make shift-clicking max/min the number of ranks
 
 [ ]improve skill description window to include name, cooldown,etc

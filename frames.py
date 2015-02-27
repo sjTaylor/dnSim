@@ -32,10 +32,37 @@ class ControlFrame(ttk.Frame):
 		self.classDropdown.grid(column=1,row=1,sticky=TK.E+TK.W)
 		self.classVar.trace('w',self.classchange)
 		
+		self.allbutton=TK.Button(self,text='All',command=self.showall)
+		self.allbutton.grid(row=2,column=0,sticky='ew',columnspan=2)
+		
+		self.classonebutton=TK.Button(self,text='class 1',command=self.showc1)
+		self.classonebutton.grid(row=2+1,column=0,sticky='ew',columnspan=2)
+		
+		self.classtwobutton=TK.Button(self,text='class 2',command=self.showc2)
+		self.classtwobutton.grid(row=2+2,column=0,sticky='ew',columnspan=2)
+		
+		self.classthreebutton=TK.Button(self,text='class 3',command=self.showc3)
+		self.classthreebutton.grid(row=2+3,column=0,sticky='ew',columnspan=2)
+		
+		
 		self.splabel = TK.Label(self,justify=TK.LEFT)
-		self.splabel.grid(row=2,column=0,sticky='wn',columnspan=2)
+		self.splabel.grid(row=2+4,column=0,sticky='wn',columnspan=2)
 		
 		self.pages = []
+	def showc1(self,event=None):
+		self.showclass(0)
+	def showc2(self,event=None):
+		self.showclass(1)
+	def showc3(self,event=None):
+		self.showclass(2)
+	def showclass(self,classnum):
+		for c in self.pages:
+			c.grid_remove()
+		if len(self.pages) > classnum:
+			self.pages[classnum].grid()
+	def showall(self,event=None):
+		for c in self.pages:
+			c.grid()
 		
 	def serverchange(self,arg1,arg2,arg3):
 		dir = './data/' + self.serverVar.get()
@@ -58,7 +85,11 @@ class ControlFrame(ttk.Frame):
 			self.pages.insert(0,SkillButtonFrame(self.skillFrame,ET.parse(self.dir+'superclasses/'+self.pages[0].superclass).getroot(),self.dpane))
 		for i in range(0,len(self.pages)):
 			self.pages[i].grid(column=i,row=0,sticky='ns')
+		self.classonebutton['text']=self.pages[0].classname
+		self.classtwobutton['text']=self.pages[1].classname
+		self.classthreebutton['text']=self.pages[2].classname
 		self.pages[1].configure(bg='#CCFFFF')
+		self.pages[2].configure(bg='#ADFF5C')
 		self.dpane.switch=True
 	def skilltotal(self):
 		total = 0
@@ -73,6 +104,12 @@ class ControlFrame(ttk.Frame):
 		text+= self.pages[2].classname + ' : ' + str(self.nums[2]) + '/129\n'
 		text+= 'SP remaining : ' + str(207-total)
 		self.splabel['text']=text
+	def skillreset(self):
+		self.dpane.switch=False
+		for i in self.pages:
+			i.skillreset()
+		self.dpane.switch=True
+		self.skilltotal()
 			
 			
 		
@@ -82,6 +119,14 @@ class SkillDescFrame(ttk.Label):
 		TK.Label.__init__(self,master,text="filler",width=self.w,
 							justify=TK.LEFT,wraplength=self.w*7,
 							anchor=TK.NW,bg='white')
+		'''
+			todo:
+			1. add skill title
+			2. add curr, next rank titles
+			3. cooldown(when applicable
+			4. required level
+			5. required skills (when applicable)
+		'''
 		self.switch=False
 		self.cframe=ccframe
 		self.grid(column=1,row=0,sticky='nsw')
@@ -115,6 +160,12 @@ class SkillButtonFrame(ttk.Frame):
 				if y != None:
 					total += y.sp()
 		return total
+	def skillreset(self):
+		for x in self.skills:
+			for y in x:
+				if y != None:
+					y.minimize()
+	
 		
 class SkillButton(ttk.Button):
 	'''
@@ -133,11 +184,23 @@ class SkillButton(ttk.Button):
 			self.update()
 			self.bind('<Button-3>',self.rClick)
 			self.bind('<Button-1>',self.lClick)
-			self.bind('<Enter>',self.update)
+			self.bind('<Shift-Button-3>',self.shiftrclick)
+			self.bind('<Shift-Button-1>',self.shiftlclick)
+			self.bind('<Enter>',self.update) 
 	def sp(self):
 		if self.skill==None:
 			return 0
 		return self.skill.sp()
+	def minimize(self):
+		if self.skill != None:
+			self.skill.minimize()
+		self.update()
+	def shiftrclick(self, event):
+		self.skill.minimize()
+		self.update()
+	def shiftlclick(self, event):
+		self.skill.maximize()
+		self.update()
 	def rClick(self,event):
 		self.skill.rankDown()
 		self.update()

@@ -1,4 +1,4 @@
-<class name="assassin" superclass="none" classLevel="0" numRows="5" numCols="4" dataVersion="1">
+<class name="Assassin" superclass="none" classLevel="0" numRows="5" numCols="4" dataVersion="1">
 	<skill name="Swift Cut" row='0' col='0' startRanks="1" buyInCost="0" limit="27">
 		<desc>Delivers a quick slash to the enemy. Charges additional cooldown at skill levels 6 and 11.\nPhysical Attack {0}%+{1}{2}</desc>
 		<reqLevel>1,4,7</reqLevel>
