@@ -6,6 +6,25 @@ Use and files in this repository at your own risk.
 
 Software is provided as is.
 
+-------------------------------------------------------
+
+How to use:
+
+Select server, then select class.
+
+Left click to rank up
+
+Right click to rank down
+
+shift-click to maximize, and minimize ranks
+
+specialization selector on the right will allow you to see all classes, or classes individually.
+This is so that smaller monitors (hopefully) don't have an issue. 
+
+Ctrl-r to reset skill selection (sets all to minimum possible ranks)
+
+-------------------------------------------------------
+
 TODO:
 
 [X]finish data files for a complete class
@@ -26,10 +45,12 @@ TODO:
 
 [ ]implement icons for skills
 
-[ ]improve description box (cooldown, reqLevel, etc)
+[ ]improve description box (cooldown, reqlevel, etc)
 
 [ ]add importing feature
 
 [X]make shift-clicking max/min the number of ranks
 
-[ ]improve skill description window to include name, cooldown,etc
+[ ] make class selector use class name attribute in file
+
+[ ] make the skillrank/max thing in the skill button separate things within the button object.

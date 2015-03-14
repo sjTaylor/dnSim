@@ -1,21 +1,22 @@
+import re
 class Skill:
 	"""The class used for holding, and processing, the data for skills"""
 	
-	def __init__(self, root):
+	def __init__(self, root,cl):
+		self.classlevel=cl
 		self.name = "filler_name"
 		self.row = 0
 		self.col = 0
 		self.duration = None
 		self.cooldown = None
-		self.reqLevel = None
+		self.reqlevel = None
 		self.buyInCost = 3
 		self.startRanks = 0
 		self.numRanks = 0
 		self.limit = 1
 		self.isUlt = False
 		self.desc = "filler \\nskill name"
-		self.requiredSkills = []
-		self.requiredLevel = []
+		self.reqskills = None
 		self.vars = dict()
 		self.numRanks = 0
 		if 'dataVersion' in root.attrib:
@@ -57,6 +58,13 @@ class Skill:
 		
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
+		if root.find('reqlevel') is not None:
+			for x in root.find('reqlevel'):
+				self.reqlevel=VarList(x.text,'yes')
+		if root.find('reqskills') != None:
+			self.reqskills = []
+			for x in root.find('reqskills').text.split(','):
+				self.reqskills.append(PreReq(x,self,self.classlevel))
 	def minimize(self):
 		self.numRanks = self.startRanks
 	def maximize(self):
@@ -72,8 +80,10 @@ class Skill:
 		self.numRanks = min(self.limit,self.numRanks+1)
 	def rankDown(self):
 		self.numRanks = max(self.startRanks,self.numRanks-1)
-	def getReqLevel(self):
-		return self.reqLevel[self.numRanks]
+	def getreqlevel(self):
+		if self.reqlevel is None:
+			return 1
+		return self.reqlevel[self.numRanks]
 	def sp(self):
 		if self.numRanks > 0:
 			if self.numRanks > 1:
@@ -111,3 +121,30 @@ class VarList:
 		perLevel = nums[-1] - nums[-2]
 		diff = index - len(nums)
 		return nums[-1] + perLevel*diff
+
+
+class PreReq:
+	def __init__(self,pr,skill,cl):
+		self.classlevel=cl
+		self.row=skill.row
+		self.col=skill.col
+		self.numranks=1
+		temp = pr.split(':')
+		if re.match('[nsew].*',pr):
+			if temp[0] == 'n':
+				self.row-=1
+			elif temp[0] == 's':
+				self.row+= 1
+			elif temp[0] == 'e':
+				self.col+= 1
+			elif temp[0] == 'w':
+				self.col-= 1
+			if ':' in pr:
+				self.numranks = int(temp[-1])
+		else:
+			#if it uses a non-default # of ranks
+			if re.match('\\d+:\\d+:\\d+:\\d+',pr):
+				self.numranks = int(temp[-1])
+			self.classlevel=int(temp[0])
+			self.row=int(temp[1])
+			self.col=int(temp[2])

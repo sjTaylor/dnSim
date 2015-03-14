@@ -10,7 +10,7 @@ import os
 class ControlFrame(ttk.Frame):
 	def __init__(self,master):
 		TK.Frame.__init__(self,master)
-		
+		self.w=35
 		self.serverPrompt = TK.Label(self,text='server : ')
 		self.serverPrompt.grid(column=0,row=0,sticky=TK.W+TK.N)
 		self.classPrompt = TK.Label(self,text='class : ')
@@ -47,6 +47,10 @@ class ControlFrame(ttk.Frame):
 		
 		self.splabel = TK.Label(self,justify=TK.LEFT)
 		self.splabel.grid(row=2+4,column=0,sticky='wn',columnspan=2)
+
+		self.warninglabel = TK.Label(#self,justify=TK.LEFT,width=self.w,wraplength=self.w*7)
+									self,text="",width=self.w,justify=TK.LEFT,wraplength=self.w*7,anchor='nw')
+		self.warninglabel.grid(row=2+4+1,column=0,sticky='nw',columnspan=2)
 		
 		self.pages = []
 	def showc1(self,event=None):
@@ -104,26 +108,73 @@ class ControlFrame(ttk.Frame):
 		text+= self.pages[2].classname + ' : ' + str(self.nums[2]) + '/129\n'
 		text+= 'SP remaining : ' + str(207-total)
 		self.splabel['text']=text
+		text='Warnings: \n'
+		for x in self.validate():
+			text+= x + '\n'
+		self.warninglabel['text']=text
+
 	def skillreset(self):
 		self.dpane.switch=False
 		for i in self.pages:
 			i.skillreset()
 		self.dpane.switch=True
 		self.skilltotal()
-			
+	def validate(self):
+		warnings = []
+		bools = []
+		ults=[]
+		ultwarnings=[]
+		skills = []
+		for p in self.pages:
+			skills.append(p.skills)
+		for l in range(0,len(skills)):
+			for r in range(0,len(skills[l])):
+				for c in range(0,len(skills[l][r])):
+					result = None
+					skill = skills[l][r][c].skill if skills[l][r][c] is not None else None
+					if skill is not None and skill.reqskills is not None and skill.numRanks > 0:
+						for pr in skill.reqskills:
+							otherskill=skills[pr.classlevel][pr.row][pr.col].skill
+							if otherskill is not None:
+								if otherskill.numRanks < pr.numranks:
+									if not skill.isUlt:
+										warnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
+									else:
+										ultwarnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
+									result=False
+								else:
+									result = True if result == None else result
+							else:
+								print('None requirement found')
+						if skill.isUlt:
+							ults.append(skills[l][r][c])
+							bools.append(result)
+		#ults need to be checked separately
+		#since one ult can be the requirement for the other one
+		for i in range(0,len(ults)):
+			if bools[i] is not None and bools[i] == False:
+				if bools[i-1] is None or not bools[i-1]:
+					while len(ultwarnings) > 0:
+						warnings.append(ultwarnings.pop(0))
+		return warnings
 			
 		
-class SkillDescFrame(ttk.Label):
+class SkillDescFrame(ttk.Frame):
 	def __init__(self,master,ccframe):
 		self.w=35
-		TK.Label.__init__(self,master,text="filler",width=self.w,
+		TK.Frame.__init__(self,master,bg='white')
+		self.header=TK.Label(self,text="",anchor='nw',font=('default',20,),bg='white')
+		self.header.grid(column=0,row=0)
+		
+		self.textbox = TK.Label(self,text="",width=self.w,
 							justify=TK.LEFT,wraplength=self.w*7,
-							anchor=TK.NW,bg='white')
+							anchor='nw',bg='white')
+		self.textbox.grid(column=0,row=1,sticky='wne')
 		'''
 			todo:
 			1. add skill title
 			2. add curr, next rank titles
-			3. cooldown(when applicable
+			3. cooldown(when applicable)
 			4. required level
 			5. required skills (when applicable)
 		'''
@@ -131,7 +182,8 @@ class SkillDescFrame(ttk.Label):
 		self.cframe=ccframe
 		self.grid(column=1,row=0,sticky='nsw')
 	def touch(self,skill):
-		self['text']=skill.getDesc()
+		self.header['text']=skill.name
+		self.textbox['text']=skill.getDesc()
 		if self.switch:
 			self.cframe.skilltotal()
 		
@@ -140,19 +192,19 @@ class SkillButtonFrame(ttk.Frame):
 	#will be used to hold the skill buttons 
 	def __init__(self,master,xmlroot,dpane):
 		TK.Frame.__init__(self,master,bg='white')
+		self.superclass=xmlroot.attrib['superclass']
+		self.classname=xmlroot.attrib['name']
+		self.classLevel=int(xmlroot.attrib['classLevel'])
 		self.descpane=dpane
 		self.skills=snip.twoD(int(xmlroot.attrib['numRows']),int(xmlroot.attrib['numCols']),None)
 		for i in xmlroot:
 			r = int(i.attrib['row'])
 			c = int(i.attrib['col'])
-			self.skills[r][c]=SkillButton(self,dpane,i)
+			self.skills[r][c]=SkillButton(self,self.classLevel,dpane,i)
 		for r in range(0,len(self.skills)):
 			for c in range(0,len(self.skills[r])):
 				if self.skills[r][c] != None:
 					self.skills[r][c].grid(column=c,row=r,padx=1*5,pady=1*5)
-		self.superclass=xmlroot.attrib['superclass']
-		self.classname=xmlroot.attrib['name']
-		self.classLevel=int(xmlroot.attrib['classLevel'])
 	def sp(self):
 		total = 0
 		for x in self.skills:
@@ -172,14 +224,14 @@ class SkillButton(ttk.Button):
 		TODO: add a parameter or some mechanism to update the skill
 		description pane once that has been implemented.
 	'''
-	def __init__(self, master,dpane=None,sk=None):
+	def __init__(self, master,cl,dpane=None,sk=None):
 		TK.Button.__init__(self,master,command=None,
 							width=8,height=4,wraplength=60)
 		if sk == None:
 			self.skill=None
 			self.configure(text=".")
 		else:
-			self.skill = SK.Skill(sk)
+			self.skill = SK.Skill(sk,cl)
 			self.descpane=dpane
 			self.update()
 			self.bind('<Button-3>',self.rClick)

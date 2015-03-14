@@ -17,8 +17,6 @@ def skillreset(event):
 '''
 root = TK.Tk()
 root.title('Dn Sim: a Dragon Nest skill simulator.')
-global printvar
-printvar = 'this is the global variable'
 #control frame
 controlFrame = FR.ControlFrame(root)
 controlFrame.grid(column=0,row=0,sticky=TK.N+TK.W+TK.E)
