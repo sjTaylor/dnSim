@@ -39,13 +39,13 @@ TODO:
 
 [X]add in sp caps for lvl 80
 
-[ ]program in a conflict detection system (not enough sp, too low a level, etc)
+[partial]program in a conflict detection system (not enough sp, too low a level, etc)
 
 [ ]program in levels other than 80
 
-[ ]implement icons for skills
+[ ]impliment icons for skills
 
-[ ]improve description box (cooldown, reqlevel, etc)
+[partial]improve description box (cooldown, reqlevel, name, etc)
 
 [ ]add importing feature
 
