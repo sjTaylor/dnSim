@@ -1,0 +1,16 @@
+How to commit changes (as far as I know).
+
+1. got to github.com 
+2. download and install github (github for windows is the one I'm currently using)
+3. open up the github program (it take a little bit for it to start on my computer)
+4. in the top-left corner click the plus sign, and go to clone?
+	It looks like there's also an option in the web interface for that says "clone to desktop"
+	https://help.github.com/articles/adding-repositories-with-github-for-windows/
+
+5. Make changes to a file or create files
+
+(from here)
+https://help.github.com/articles/synchronizing-repositories/
+6. go to github and select the repository
+7. add a short summary of the changes and click commit
+8. then click Sync in the top-right corner

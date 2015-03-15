@@ -1,0 +1,59 @@
+<!--very important! only the 2nd specializations go in the root of the server folder. the other ones go in the superclasses folder!-->
+
+<!--As a note I'm doing this description in xml because I like the 
+	coloring my text editor does, and so that your text editor will
+	have nice colors too-->
+
+<!--This documentation will largely be by example, but will include descriptions of things I believe need to be said explicitly
+	email gitdnsim@gmail.com or message sjTaylor on reddit if you think I should include/change something. Or just try to push a commit on the project (once I get that all sorted out)-->
+
+<!--the superclass is the class that came before it. So lunar knight comes from swordmaster. swordmaster comes from warrior. For classes without a superclass (like warrior) simply put "none"-->
+
+<!--classlevel is 0 for first class, 1 for 1st specialization, and 2 for 2nd specialization-->
+
+<!--there is also a dataVerson attribute, but for now the 1st one hasn't quite been finalized, and the program should default to 1 so I left it out-->
+
+<class name="the_class's_name" superclass="filename_for_preceding_class.xml" classLevel="specialization_number" numRows"number_of_rows_in_skill_page" numCols="number_of_columns_in_skill_page">
+
+	<!--something I didn't include in the below skill is the isUlt attribute. By default isUlt="false", but for an actual ultimate you want isUlt="true". this is needed since one ult can be the skill prereq for the other ult-->
+	<skill name="skill's_name" row="int" col="int" limit="maximum_ranks(not including +1 items)">
+		<!--The <desc> tag is for the skill description, and has no attributes-->
+		<desc>This is the skill description. It can include things like\nTo make a it go down a line, and {0}, {1}, and more generally {id} for variables\nVariable is another kind of tag that holds a list of stuff that the variables will be at different levels. see more about them below</desc>
+		<!--The <var id="something"> tags are used in conjunction with the <desc> tag so that the description doesn't have to be re-written for each rank of a skill.-->
+		<!--It uses a comma-separated list starting with the value at rank 1, then a comma and value for rank 2, and so on. If there are more ranks for the skill than elements in the list it simply uses the last one in the list for those ranks-->
+
+		<!--if there were 7 max ranks this would be the amount of vars needed so that the +1 item's information would be included-->
+		<!--for numbers and stuff that doesn't ever change it's easier to just put the value in the description (like aerial kicks and such which do fixed %age damage), but you can make a <var> for them if you want. It won't hurt anything-->
+		<var id="0">1,2,3,4,5,6,7,8</var>
+		<!--ranks 4-8 on this skill would have {1} replaced with 'words'-->
+		<var id="1">you,can,do,words</var>
+		<!--you're not just limited to numbers or words-->
+		<var id="id">or even,multiple words,with numb3rs (an parens)</var>
+		<!--as far as I know you just can't use commas since I just split the string on commas-->
+
+		<!--normally you should only have 1 reqLevel in any skill-->
+		<!--some skills only have a maximun of 1 rank. so one value is okay here-->
+		<reqlevel>15</reqlevel>
+		<!--but most skills allow for multiple ranks, so you need at least 2 numbers so that the program can predict the other level requirements-->
+		<!--implicitly 3,6,9,12,15,18,... are all the required levels. only bounded by the limit attribute-->
+		<reqlevel>3,6</reqlevel>
+
+		<!--like all other lists reqskills is a comma-separated list. make sure not to incude any whitespace (spaces, tabs, etc) as it may currently cause proglems-->
+		<!--I've included examples of all 2/4 addressing types for required skills-->
+		<!--You can either describe skill requirments using cardinal directions (n,s,e,w for north,south,east,west respectively), or by giving the coordinates for the skill in the form classlevel:row:column-->
+		<!--additionally adding :num will override the default requirement of 1 rank and replace it with num so 1:0:0 requires 1 rank from the top left skill of the 1st specialization where 1:0:0:6 requires 6 ranks. similarly n requires 1 rank from the skill above, and n:7 requires 7 ranks from the skill above-->
+		<reqskills>n,w:2,1:1:0,1:0:0:6</reqskills>
+
+		<!--cooldown acts just like the <var> tag. it's a comma-separated list-->
+		<!--you may notice that some skills include the cooldown in the description. I know it's a little bit of a hassle, but in those cases you will have to make a <var> for it, and <cooldown> separately with the same information.-->
+		<!--you should also only have 1 per skill (if any). the 2nd one is just for demonstrative purposes-->
+		<cooldown>60</cooldown>
+		<cooldown>45,40,35,30</cooldown>
+	</skill>
+	<!--and to include more skills just make more <skill> tags with the required information-->
+
+	<!--Other attributes for <skill> that weren't included because they have a default value-->
+	<!--buyInCost="number of skill points to get the 1st rank in the skill" (defaults to 3)-->
+	<!--startRanks="number of ranks int the skill you start with" (defaults to 0)-->
+	<!--isUlt="true or false" (defaults to false since most skills aren't ultimates.)-->
+</class>

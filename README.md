@@ -22,6 +22,11 @@ specialization selector on the right will allow you to see all classes, or class
 This is so that smaller monitors (hopefully) don't have an issue. 
 
 Ctrl-r to reset skill selection (sets all to minimum possible ranks)
+-------------------------------------------------------
+
+For instructions on how to contribute to the project look in the docs folder.
+
+specifically how_to_commit.txt and format_descriptons.xml
 
 -------------------------------------------------------
 

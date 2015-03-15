@@ -220,9 +220,10 @@ class SkillButton(ttk.Frame):
 		TODO: add a parameter or some mechanism to update the skill
 		description pane once that has been implemented.
 	'''
+	buttonbg='#4F5144'
 	def __init__(self, master,cl,dpane=None,sk=None):
 		TK.Frame.__init__(self,master,#command=None,
-							width=8,height=4,bg='black'#,wraplength=60
+							width=8,height=4,bg='gray' #,wraplength=60
 							)
 		if sk == None:
 			self.skill=None
@@ -231,7 +232,7 @@ class SkillButton(ttk.Frame):
 			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60)
 			self.button.grid(row=0)
 
-			self.ranklabel= TK.Label(self,text='',bg='black',fg='white')
+			self.ranklabel= TK.Label(self,text='',bg='gray',fg='white')
 			self.ranklabel.grid(row=1)
 
 			self.skill = SK.Skill(sk,cl)
