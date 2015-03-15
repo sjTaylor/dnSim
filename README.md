@@ -53,4 +53,4 @@ TODO:
 
 [ ] make class selector use class name attribute in file
 
-[ ] make the skillrank/max thing in the skill button separate things within the button object.
+[X] make the skillrank/max thing in the skill button separate things within the button object.

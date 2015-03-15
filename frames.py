@@ -15,7 +15,7 @@ class ControlFrame(ttk.Frame):
 		self.serverPrompt.grid(column=0,row=0,sticky=TK.W+TK.N)
 		self.classPrompt = TK.Label(self,text='class : ')
 		self.classPrompt.grid(column=0,row=1,sticky=TK.W+TK.N)
-		
+
 		self.serverList = []
 		for x in os.listdir('./data/'):
 			if os.path.isdir('./data/' + x):
@@ -25,33 +25,32 @@ class ControlFrame(ttk.Frame):
 		self.serverDropdown.grid(column=1,row=0,sticky=TK.E+TK.W)
 		self.serverDropdown.configure(width=15)
 		self.serverVar.trace('w',self.serverchange)
-		
-		self.classList = ['filler']
-		self.classVar = TK.StringVar(self)
+
+		self.classList     = ['filler']
+		self.classVar      = TK.StringVar(self)
 		self.classDropdown = TK.OptionMenu(self,self.classVar, *self.classList)
 		self.classDropdown.grid(column=1,row=1,sticky=TK.E+TK.W)
 		self.classVar.trace('w',self.classchange)
-		
+
 		self.allbutton=TK.Button(self,text='All',command=self.showall)
 		self.allbutton.grid(row=2,column=0,sticky='ew',columnspan=2)
-		
+
 		self.classonebutton=TK.Button(self,text='class 1',command=self.showc1)
 		self.classonebutton.grid(row=2+1,column=0,sticky='ew',columnspan=2)
-		
+
 		self.classtwobutton=TK.Button(self,text='class 2',command=self.showc2)
 		self.classtwobutton.grid(row=2+2,column=0,sticky='ew',columnspan=2)
-		
+
 		self.classthreebutton=TK.Button(self,text='class 3',command=self.showc3)
 		self.classthreebutton.grid(row=2+3,column=0,sticky='ew',columnspan=2)
-		
-		
+
 		self.splabel = TK.Label(self,justify=TK.LEFT)
 		self.splabel.grid(row=2+4,column=0,sticky='wn',columnspan=2)
 
 		self.warninglabel = TK.Label(#self,justify=TK.LEFT,width=self.w,wraplength=self.w*7)
 									self,text="",width=self.w,justify=TK.LEFT,wraplength=self.w*7,anchor='nw')
 		self.warninglabel.grid(row=2+4+1,column=0,sticky='nw',columnspan=2)
-		
+
 		self.pages = []
 	def showc1(self,event=None):
 		self.showclass(0)
@@ -67,7 +66,7 @@ class ControlFrame(ttk.Frame):
 	def showall(self,event=None):
 		for c in self.pages:
 			c.grid()
-		
+
 	def serverchange(self,arg1,arg2,arg3):
 		dir = './data/' + self.serverVar.get()
 		temp = []
@@ -157,15 +156,14 @@ class ControlFrame(ttk.Frame):
 					while len(ultwarnings) > 0:
 						warnings.append(ultwarnings.pop(0))
 		return warnings
-			
-		
+
 class SkillDescFrame(ttk.Frame):
 	def __init__(self,master,ccframe):
 		self.w=35
 		TK.Frame.__init__(self,master,bg='white')
 		self.header=TK.Label(self,text="",anchor='nw',font=('default',20,),bg='white')
 		self.header.grid(column=0,row=0)
-		
+
 		self.textbox = TK.Label(self,text="",width=self.w,
 							justify=TK.LEFT,wraplength=self.w*7,
 							anchor='nw',bg='white')
@@ -186,8 +184,7 @@ class SkillDescFrame(ttk.Frame):
 		self.textbox['text']=skill.getDesc()
 		if self.switch:
 			self.cframe.skilltotal()
-		
-		
+
 class SkillButtonFrame(ttk.Frame):
 	#will be used to hold the skill buttons 
 	def __init__(self,master,xmlroot,dpane):
@@ -217,27 +214,33 @@ class SkillButtonFrame(ttk.Frame):
 			for y in x:
 				if y != None:
 					y.minimize()
-	
-		
-class SkillButton(ttk.Button):
+
+class SkillButton(ttk.Frame):
 	'''
 		TODO: add a parameter or some mechanism to update the skill
 		description pane once that has been implemented.
 	'''
 	def __init__(self, master,cl,dpane=None,sk=None):
-		TK.Button.__init__(self,master,command=None,
-							width=8,height=4,wraplength=60)
+		TK.Frame.__init__(self,master,#command=None,
+							width=8,height=4,bg='black'#,wraplength=60
+							)
 		if sk == None:
 			self.skill=None
-			self.configure(text=".")
+			#self.configure(text=".")
 		else:
+			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60)
+			self.button.grid(row=0)
+
+			self.ranklabel= TK.Label(self,text='',bg='black',fg='white')
+			self.ranklabel.grid(row=1)
+
 			self.skill = SK.Skill(sk,cl)
 			self.descpane=dpane
 			self.update()
-			self.bind('<Button-3>',self.rClick)
-			self.bind('<Button-1>',self.lClick)
-			self.bind('<Shift-Button-3>',self.shiftrclick)
-			self.bind('<Shift-Button-1>',self.shiftlclick)
+			self.button.bind('<Button-3>',self.rClick)
+			self.button.bind('<Button-1>',self.lClick)
+			self.button.bind('<Shift-Button-3>',self.shiftrclick)
+			self.button.bind('<Shift-Button-1>',self.shiftlclick)
 			self.bind('<Enter>',self.update) 
 	def sp(self):
 		if self.skill==None:
@@ -260,7 +263,9 @@ class SkillButton(ttk.Button):
 		self.skill.rankUp()
 		self.update()
 	def update(self,event=None):
-		self.config(text=self.gettext())
+		#self.config(text=self.gettext())
 		self.descpane.touch(self.skill)
+		self.button['text']    = self.skill.name
+		self.ranklabel['text'] = str(self.skill.numRanks) + '/' + str(self.skill.limit)
 	def gettext(self):
 		return self.skill.name + "\n" + str(self.skill.numRanks) + '/' + str(self.skill.limit)
