@@ -1,14 +1,12 @@
-dnSim
-=====
+#dnSim
+
 The goal of this project is to creat a data-driven skill simulator for Eyedentity's game "Dragon Nest"
 
 Use and files in this repository at your own risk.
 
 Software is provided as is.
 
--------------------------------------------------------
-
-How to use:
+##How to use:
 
 Select server, then select class.
 
@@ -23,40 +21,40 @@ This is so that smaller monitors (hopefully) don't have an issue.
 
 Ctrl-r to reset skill selection (sets all to minimum possible ranks)
 
--------------------------------------------------------
+##Commiting Changes
 
 For instructions on how to contribute to the project look in the docs folder.
 
 specifically how_to_commit.txt and format_descriptons.xml
 
--------------------------------------------------------
+##TODO:
 
-TODO:
+* after 1 data set is complete get other people involved to finish data aquisition
 
-[X]finish data files for a complete class
+* [skill,lvl]program in a conflict detection system (not enough sp, too low a level, etc)
 
-[ ]after 1 data set is complete get other people involved to finish data aquisition
+* impliment icons for skills
 
-[X]add in the handling for multiple skill sheets (either wide or pages)
+* [partial]improve description box (cooldown, reqlevel, name, etc)
 
-[X]add in sp counting
+* add importing feature
 
-[X]add in an option for pages instead of wide mode
+*  make class selector use class name attribute in file
 
-[X]add in sp caps for lvl 80
+##Done
 
-[skill,lvl]program in a conflict detection system (not enough sp, too low a level, etc)
+* finish data files for a complete class
 
-[X]program in levels other than 80
+* add in the handling for multiple skill sheets (either wide or pages)
 
-[ ]impliment icons for skills
+* add in sp counting
 
-[partial]improve description box (cooldown, reqlevel, name, etc)
+* add in an option for pages instead of wide mode
 
-[ ]add importing feature
+* add in sp caps for lvl 80
 
-[X]make shift-clicking max/min the number of ranks
+* program in levels other than 80
 
-[ ] make class selector use class name attribute in file
+* make shift-clicking max/min the number of ranks
 
-[X] make the skillrank/max thing in the skill button separate things within the button object.
+*  make the skillrank/max thing in the skill button separate things within the button object.
