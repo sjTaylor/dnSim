@@ -1,0 +1,13 @@
+
+
+
+<!--do comments like this-->
+<class name="" superclass="none" classLevel="" numRows="" numCols="" dataVersion="1">
+	<skill name="" row='' col='' limit="">
+		<desc></desc>
+		<reqlevel></reqlevel>
+		<var id="0"></var>
+		<var id="1"></var>
+		<cooldown></cooldown>
+	</skill>
+</class>
