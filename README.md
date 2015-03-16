@@ -45,9 +45,9 @@ TODO:
 
 [X]add in sp caps for lvl 80
 
-[partial]program in a conflict detection system (not enough sp, too low a level, etc)
+[CD,lvl]program in a conflict detection system (not enough sp, too low a level, etc)
 
-[ ]program in levels other than 80
+[X]program in levels other than 80
 
 [ ]impliment icons for skills
 

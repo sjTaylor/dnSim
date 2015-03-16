@@ -18,7 +18,6 @@ class Skill:
 		self.desc = "filler \\nskill name"
 		self.reqskills = None
 		self.vars = dict()
-		self.numRanks = 0
 		if 'dataVersion' in root.attrib:
 			temp = root.attrib['dataVersion']
 			if temp == '1':
@@ -59,8 +58,7 @@ class Skill:
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
 		if root.find('reqlevel') is not None:
-			for x in root.find('reqlevel'):
-				self.reqlevel=VarList(x.text,'yes')
+			self.reqlevel=VarList(root.find('reqlevel'),'yes')
 		if root.find('reqskills') != None:
 			self.reqskills = []
 			for x in root.find('reqskills').text.split(','):
@@ -118,6 +116,8 @@ class VarList:
 	def getPredictedVal(self, nums, index):
 		if index < len(nums):
 			return nums[index]
+		if len(nums) == 1:
+			return nums[0]
 		perLevel = nums[-1] - nums[-2]
 		diff = index - len(nums)
 		return nums[-1] + perLevel*diff

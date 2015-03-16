@@ -11,10 +11,25 @@ class ControlFrame(ttk.Frame):
 	def __init__(self,master):
 		TK.Frame.__init__(self,master)
 		self.w=35
+
+		self.spendingsp =[0,0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48,51,54,57,60,63,66,69,72,75,78,81,84,87,90,93,96,99,102,105,108,111,114,117,120,123,126,129,132,135,138,141,144,147,149,151,153,155,157,159,161,163,165,167,169,171,173,175,177,179,181,183,185,187,189,191,193,195,197,199,201,203,205,207]
+		self.maxsp      =[
+			[0,0,3,6,9,12,15,18,21,24,27,30,33,36,39,26,28,30,31,33,35,37,39,41,43,45,46,48,50,52,54,56,58,60,61,63,65,67,69,71,73,75,76,78,80,82,84,86,88,90,91,93,94,95,96,98,99,100,101,103,104,105,106,108,109,110,111,113,114,115,116,118,119,120,121,123,124,125,126,128,129],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,29,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87,89,90,92,94,96,97,98,99,101,102,103,105,106,107,109,110,111,112,114,115,116,118,119,120,121,123,124,125,127,128,129,130,132,133],
+			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,82,84,86,88,90,91,93,94,95,96,98,99,100,101,103,104,105,106,108,109,110,111,113,114,115,116,118,119,120,121,123,124,125,126,128,129]]
+		self.level=80
+
+		self.levelsetbutton = TK.Button(self,text='set level',command=self.setlevel)
+		self.levelsetbutton.grid(column=0,row=0)
+
+		self.levelentry = TK.Entry(self)
+		self.levelentry.grid(column=1,row=0)
+		self.levelentry.insert(0,'80')
+
 		self.serverPrompt = TK.Label(self,text='server : ')
-		self.serverPrompt.grid(column=0,row=0,sticky=TK.W+TK.N)
-		self.classPrompt = TK.Label(self,text='class : ')
-		self.classPrompt.grid(column=0,row=1,sticky=TK.W+TK.N)
+		self.serverPrompt.grid(column=0,row=0+1,sticky=TK.W+TK.N)
+		self.classPrompt  = TK .Label(self,text='class : ')
+		self.classPrompt.grid(column=0,row=1+1,sticky=TK.W+TK.N)
 
 		self.serverList = []
 		for x in os.listdir('./data/'):
@@ -22,36 +37,38 @@ class ControlFrame(ttk.Frame):
 				self.serverList.append(x)
 		self.serverVar = TK.StringVar(self)
 		self.serverDropdown = TK.OptionMenu(self,self.serverVar, *self.serverList)
-		self.serverDropdown.grid(column=1,row=0,sticky=TK.E+TK.W)
+		self.serverDropdown.grid(column=1,row=0+1,sticky=TK.E+TK.W)
 		self.serverDropdown.configure(width=15)
 		self.serverVar.trace('w',self.serverchange)
 
 		self.classList     = ['filler']
 		self.classVar      = TK.StringVar(self)
 		self.classDropdown = TK.OptionMenu(self,self.classVar, *self.classList)
-		self.classDropdown.grid(column=1,row=1,sticky=TK.E+TK.W)
+		self.classDropdown.grid(column=1,row=1+1,sticky=TK.E+TK.W)
 		self.classVar.trace('w',self.classchange)
 
 		self.allbutton=TK.Button(self,text='All',command=self.showall)
-		self.allbutton.grid(row=2,column=0,sticky='ew',columnspan=2)
+		self.allbutton.grid(row=2+1,column=0,sticky='ew',columnspan=2)
 
 		self.classonebutton=TK.Button(self,text='class 1',command=self.showc1)
-		self.classonebutton.grid(row=2+1,column=0,sticky='ew',columnspan=2)
+		self.classonebutton.grid(row=2+1+1,column=0,sticky='ew',columnspan=2)
 
 		self.classtwobutton=TK.Button(self,text='class 2',command=self.showc2)
-		self.classtwobutton.grid(row=2+2,column=0,sticky='ew',columnspan=2)
+		self.classtwobutton.grid(row=2+2+1,column=0,sticky='ew',columnspan=2)
 
 		self.classthreebutton=TK.Button(self,text='class 3',command=self.showc3)
-		self.classthreebutton.grid(row=2+3,column=0,sticky='ew',columnspan=2)
+		self.classthreebutton.grid(row=2+3+1,column=0,sticky='ew',columnspan=2)
 
 		self.splabel = TK.Label(self,justify=TK.LEFT)
-		self.splabel.grid(row=2+4,column=0,sticky='wn',columnspan=2)
+		self.splabel.grid(row=2+4+1,column=0,sticky='wn',columnspan=2)
 
 		self.warninglabel = TK.Label(#self,justify=TK.LEFT,width=self.w,wraplength=self.w*7)
 									self,text="",width=self.w,justify=TK.LEFT,wraplength=self.w*7,anchor='nw')
-		self.warninglabel.grid(row=2+4+1,column=0,sticky='nw',columnspan=2)
+		self.warninglabel.grid(row=2+4+1+1,column=0,sticky='nw',columnspan=2)
 
 		self.pages = []
+	def setlevel(self,event=None):
+		self.level= int(self.levelentry.get())
 	def showc1(self,event=None):
 		self.showclass(0)
 	def showc2(self,event=None):
@@ -88,9 +105,9 @@ class ControlFrame(ttk.Frame):
 			self.pages.insert(0,SkillButtonFrame(self.skillFrame,ET.parse(self.dir+'superclasses/'+self.pages[0].superclass).getroot(),self.dpane))
 		for i in range(0,len(self.pages)):
 			self.pages[i].grid(column=i,row=0,sticky='ns')
-		self.classonebutton['text']=self.pages[0].classname
-		self.classtwobutton['text']=self.pages[1].classname
-		self.classthreebutton['text']=self.pages[2].classname
+		self.classonebutton['text']   =self.pages[0].classname
+		self.classtwobutton['text']   =self.pages[1].classname
+		self.classthreebutton['text'] =self.pages[2].classname
 		self.pages[1].configure(bg='#CCFFFF')
 		self.pages[2].configure(bg='#ADFF5C')
 		self.dpane.switch=True
@@ -102,10 +119,10 @@ class ControlFrame(ttk.Frame):
 			total += temp
 			self.nums.append(temp)
 		text = 'SP Spent : ' + str(total) + '\n'
-		text+= self.pages[0].classname + ' : ' + str(self.nums[0]) + '/129\n'
-		text+= self.pages[1].classname + ' : ' + str(self.nums[1]) + '/133\n'
-		text+= self.pages[2].classname + ' : ' + str(self.nums[2]) + '/129\n'
-		text+= 'SP remaining : ' + str(207-total)
+		text+= self.pages[0].classname + ' : ' + str(self.nums[0]) + '/'+str(self.maxsp[0][self.level])+'\n'
+		text+= self.pages[1].classname + ' : ' + str(self.nums[1]) + '/'+str(self.maxsp[1][self.level])+'\n'
+		text+= self.pages[2].classname + ' : ' + str(self.nums[2]) + '/'+str(self.maxsp[2][self.level])+'\n'
+		text+= 'SP remaining : ' + str(self.spendingsp[self.level]-total)
 		self.splabel['text']=text
 		text='Warnings: \n'
 		for x in self.validate():
@@ -131,7 +148,12 @@ class ControlFrame(ttk.Frame):
 				for c in range(0,len(skills[l][r])):
 					result = None
 					skill = skills[l][r][c].skill if skills[l][r][c] is not None else None
+					if skill is not None and skill.reqlevel is not None and skill.numRanks > 0:
+						#checking for level requirements
+						if skill.getreqlevel() > self.level:
+							warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel()))
 					if skill is not None and skill.reqskills is not None and skill.numRanks > 0:
+						#Checking for the requisite skills
 						for pr in skill.reqskills:
 							otherskill=skills[pr.classlevel][pr.row][pr.col].skill
 							if otherskill is not None:
