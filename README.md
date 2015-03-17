@@ -35,11 +35,15 @@ specifically how_to_commit.txt and format_descriptons.xml
 
 * impliment icons for skills
 
-* [partial]improve description box (cooldown, reqlevel, name, etc)
+* [partial]improve description box (cooldown, reqlevel, name, sp requirements, etc)
 
 * add importing feature
 
 *  make class selector use class name attribute in file
+
+* Make the level set button propogate changes in max sp spent (hovering onto skills does this currently)
+
+* generally make it look nicer
 
 ##Done
 

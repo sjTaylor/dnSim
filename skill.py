@@ -88,6 +88,18 @@ class Skill:
 				return self.buyInCost + self.numRanks - 1
 			return self.buyInCost
 		return 0
+	def getcd(self):
+		if self.cooldown is None:
+			return None
+		return self.cooldown[self.numRanks-1 if self.numRanks > 1 else 0]
+	def levelreq(self):
+		if self.numRanks is self.limit:
+			return None
+		self.rankUp()
+		temp = self.sp()
+		temp2 = self.getreqlevel()
+		self.rankDown()
+		return [temp2, temp - self.sp()]
 
 class VarList:
 	def __init__(self, node, type='nope'):

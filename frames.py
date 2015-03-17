@@ -182,9 +182,10 @@ class ControlFrame(ttk.Frame):
 class SkillDescFrame(ttk.Frame):
 	def __init__(self,master,ccframe):
 		self.w=35
+		self.line= '-'*self.w
 		TK.Frame.__init__(self,master,bg='white')
-		self.header=TK.Label(self,text="",anchor='nw',font=('default',20,),bg='white')
-		self.header.grid(column=0,row=0)
+		self.header=TK.Label(self,text="",anchor='nw',font=('default',20,),bg='white',justify=TK.LEFT)
+		self.header.grid(column=0,row=0,sticky='nwe')
 
 		self.textbox = TK.Label(self,text="",width=self.w,
 							justify=TK.LEFT,wraplength=self.w*7,
@@ -203,7 +204,17 @@ class SkillDescFrame(ttk.Frame):
 		self.grid(column=1,row=0,sticky='nsw')
 	def touch(self,skill):
 		self.header['text']=skill.name
-		self.textbox['text']=skill.getDesc()
+		temp = 'Skill Rank : ' + str(skill.numRanks) + '\n'
+		temp += 'cooldown : ' + str(skill.getcd())  + '\n' if skill.getcd() is not None else ''
+		temp += self.line + '\n'
+		if skill.levelreq() is not None:
+			t = skill.levelreq()
+			temp += 'level up requirements:\n'
+			temp += 'Character level: ' + str(t[0]) + '\n'
+			temp += 'SP required    : ' + str(t[1]) + '\n'
+			temp += self.line + '\n'
+
+		self.textbox['text']=temp + skill.getDesc()
 		if self.switch:
 			self.cframe.skilltotal()
 
