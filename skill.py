@@ -95,11 +95,11 @@ class Skill:
 	def levelreq(self):
 		if self.numRanks is self.limit:
 			return None
+		rlevel = self.getreqlevel()
 		self.rankUp()
-		temp = self.sp()
-		temp2 = self.getreqlevel()
+		nspused = self.sp()
 		self.rankDown()
-		return [temp2, temp - self.sp()]
+		return [rlevel, nspused - self.sp()]
 
 class VarList:
 	def __init__(self, node, type='nope'):
@@ -131,7 +131,7 @@ class VarList:
 		if len(nums) == 1:
 			return nums[0]
 		perLevel = nums[-1] - nums[-2]
-		diff = index - len(nums)
+		diff = index - len(nums) + 1
 		return nums[-1] + perLevel*diff
 
 
