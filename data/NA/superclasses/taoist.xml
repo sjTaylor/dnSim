@@ -128,7 +128,7 @@
 		<var id="1">2158,6013,7297,15699,18339,27000,30589,34300,38134,42083,53242,58412,64027,70105</var>
 		<cooldown>27</cooldown>
 	</skill>
-	<skill name="Pulse Ring" row='5' col='0' limit="2" isUlt="True">
+	<skill name="Pulse Ring" row='5' col='0' limit="2" isult="True">
 		<desc>Creates a ball of chakra at your fingertips to attack enemies or protect your allies.\n\n(Regular Attack Button): Create a Chakra barrier\nPhysical Damage Taken: -70%\nMagic Damage Taken: -70%\nCancels 10 harmeful status effect(s)\n\n(Special Attack Button): Chakra Explosion\nLight Damage\nPhysical Damage {0}%+{1}</desc>
 		<reqlevel>40,60</reqlevel>
 		<reqskills>n:1</reqskills>
@@ -136,7 +136,7 @@
 		<var id="1">8105,34145</var>
 		<cooldown>125</cooldown>
 	</skill>
-	<skill name="Dark Conviction" row='5' col='3' limit="2" isUlt="True">
+	<skill name="Dark Conviction" row='5' col='3' limit="2" isult="True">
 		<desc>Hook the ground to summon up the flames of darkness. The summoned flames will erupt out of the ground, then crash back dea another round of damage that burns enemies with dark magic.\nDark Magic\nPhysical Damage {0}%+{1}\nAdditional Ground Explosion Damage: 25%\nDark Burn Damage Taken: 30%\nBurn Damage Duration: 10 sec</desc>
 		<reqlevel>40,60</reqlevel>
 		<reqskills>n:1</reqskills>

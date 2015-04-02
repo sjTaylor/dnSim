@@ -27,13 +27,21 @@ For instructions on how to contribute to the project look in the docs folder.
 
 specifically how_to_commit.txt and format_descriptons.xml
 
+##Installation
+
+With the addition of skill icon support it seems that more than the standard windows binary for 3.4 needs to be installed. 
+Anyways below is a list of things that need to be installed.
+
+1. Python 3.4 and tkinter which is bundled together in the windows installer on [python website](https://www.python.org/).
+2. you will need to install pillow (adds image support)  
+It was quite easy to install for me. In the command line I ran 
+`pip install Pillow`
+
 ##TODO:
 
 * after 1 data set is complete get other people involved to finish data aquisition
 
 * [skill,lvl]program in a conflict detection system (not enough sp, too low a level, etc)
-
-* impliment icons for skills
 
 * [partial]improve description box (cooldown, reqlevel, name, sp requirements, etc)
 
@@ -62,3 +70,5 @@ specifically how_to_commit.txt and format_descriptons.xml
 * make shift-clicking max/min the number of ranks
 
 *  make the skillrank/max thing in the skill button separate things within the button object.
+
+* impliment icons for skills

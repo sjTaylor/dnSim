@@ -3,9 +3,10 @@ import xml.etree.ElementTree as ET
 import tkinter as TK
 import skill as SK
 from tkinter import ttk
+
 import snip
 import os
-
+from PIL import Image, ImageTk
 
 class ControlFrame(ttk.Frame):
 	def __init__(self,master):
@@ -148,17 +149,17 @@ class ControlFrame(ttk.Frame):
 				for c in range(0,len(skills[l][r])):
 					result = None
 					skill = skills[l][r][c].skill if skills[l][r][c] is not None else None
-					if skill is not None and skill.reqlevel is not None and skill.numRanks > 0:
+					if skill is not None and skill.reqlevel is not None and skill.numranks > 0:
 						#checking for level requirements
 						if skill.getreqlevel() > self.level:
 							warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel()))
-					if skill is not None and skill.reqskills is not None and skill.numRanks > 0:
+					if skill is not None and skill.reqskills is not None and skill.numranks > 0:
 						#Checking for the requisite skills
 						for pr in skill.reqskills:
 							otherskill=skills[pr.classlevel][pr.row][pr.col].skill
 							if otherskill is not None:
-								if otherskill.numRanks < pr.numranks:
-									if not skill.isUlt:
+								if otherskill.numranks < pr.numranks:
+									if not skill.isult:
 										warnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
 									else:
 										ultwarnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
@@ -167,7 +168,7 @@ class ControlFrame(ttk.Frame):
 									result = True if result == None else result
 							else:
 								print('None requirement found')
-						if skill.isUlt:
+						if skill.isult:
 							ults.append(skills[l][r][c])
 							bools.append(result)
 		#ults need to be checked separately
@@ -204,7 +205,7 @@ class SkillDescFrame(ttk.Frame):
 		self.grid(column=1,row=0,sticky='nsw')
 	def touch(self,skill):
 		self.header['text']=skill.name
-		temp = 'Skill Rank : ' + str(skill.numRanks) + '\n'
+		temp = 'Skill Rank : ' + str(skill.numranks) + '\n'
 		temp += 'cooldown : ' + str(skill.getcd())  + '\n' if skill.getcd() is not None else ''
 		temp += self.line + '\n'
 		if skill.levelreq() is not None:
@@ -260,7 +261,6 @@ class SkillButton(ttk.Frame):
 							)
 		if sk == None:
 			self.skill=None
-			#self.configure(text=".")
 		else:
 			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60)
 			self.button.grid(row=0)
@@ -275,7 +275,11 @@ class SkillButton(ttk.Frame):
 			self.button.bind('<Button-1>',self.lClick)
 			self.button.bind('<Shift-Button-3>',self.shiftrclick)
 			self.button.bind('<Shift-Button-1>',self.shiftlclick)
-			self.bind('<Enter>',self.update) 
+			self.bind('<Enter>',self.update)
+			if self.skill.geticon() is not None:
+				self.icon = ImageTk.PhotoImage(file='./icons/' + self.skill.geticon())
+				self.button.configure(image=self.icon,width=65,height=65)
+			
 	def sp(self):
 		if self.skill==None:
 			return 0
@@ -300,6 +304,6 @@ class SkillButton(ttk.Frame):
 		#self.config(text=self.gettext())
 		self.descpane.touch(self.skill)
 		self.button['text']    = self.skill.name
-		self.ranklabel['text'] = str(self.skill.numRanks) + '/' + str(self.skill.limit)
+		self.ranklabel['text'] = str(self.skill.numranks) + '/' + str(self.skill.limit)
 	def gettext(self):
-		return self.skill.name + "\n" + str(self.skill.numRanks) + '/' + str(self.skill.limit)
+		return self.skill.name + "\n" + str(self.skill.numranks) + '/' + str(self.skill.limit)

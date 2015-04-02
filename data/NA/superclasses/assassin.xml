@@ -1,13 +1,14 @@
 <class name="Assassin" superclass="none" classLevel="0" numRows="5" numCols="4" dataVersion="1">
-	<skill name="Swift Cut" row='0' col='0' startRanks="1" buyInCost="0" limit="27">
+	<skill name="Swift Cut" row='0' col='0' startranks="1" buyInCost="0" limit="27">
 		<desc>Delivers a quick slash to the enemy. Charges additional cooldown at skill levels 6 and 11.\nPhysical Attack {0}%+{1}{2}</desc>
 		<reqlevel>1,4,7</reqlevel>
 		<var id="0">121,125,128,131,135,150,153,156,159,163,178,181,184,188,191,206,209,213,216,219,234,238,241,244,247,263,266,269</var>
 		<var id="1">4,8,17,24,37,72,87,122,324,370,504,1275,1529,1813,3764,5608,6316,7037,7769,8514,10944,11919,12970,14109,15341,19236,20901,22706</var>
 		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
+		<icon>swift_cut.bmp</icon>
 		<cooldown>6</cooldown>
 	</skill>
-	<skill name="Piercing Star" row="0" col="1" startRanks="1" buyInCost="0" limit="27">
+	<skill name="Piercing Star" row="0" col="1" startranks="1" buyInCost="0" limit="27">
 		<desc>Creates a magical spinning dagger and flings it forward. Charges additional cooldown at skill levels 6 and 11.\nEffective on knocked down enemies.\nPhysical Attack {0}%+{1},{2}</desc>
 		<reqlevel>1,4,7</reqlevel>
 		<var id="0">201,206,211,215,220,257,262,267,271,276,314,318,323,327,332,370,374,379,383,388,426,430,435,440,444,449,453,458</var>
@@ -15,15 +16,15 @@
 		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
 		<cooldown>8</cooldown>
 	</skill>
-	<skill name="Gore Kick" row="0" col="2" startRanks="1" buyInCost="0" limit="1">
+	<skill name="Gore Kick" row="0" col="2" startranks="1" buyInCost="0" limit="1">
 		<desc>Press special attack to push enemies back with a roundhouse kick.\nPhysical Attack 50%</desc>
 		<cooldown>0</cooldown>
 	</skill>
-	<skill name="Air Sprint" row="0" col="3" startRanks="1" buyInCost="0" limit="1">
+	<skill name="Air Sprint" row="0" col="3" startranks="1" buyInCost="0" limit="1">
 		<desc>Press jump again while already jumping to double jump.</desc>
 		<cooldown>5</cooldown>
 	</skill>
-	<skill name="Dirty Trick" row="1" col="0" startRanks="1" buyInCost="0" limit="27">
+	<skill name="Dirty Trick" row="1" col="0" startranks="1" buyInCost="0" limit="27">
 		<desc>Throw dirt to blind the enemy. then jump forward and strike the enemy down. Press regular attack while throwing dirt to activate this skill.\nPhysical Attack {0}%+{1}\n\n{2}</desc>
 		<reqlevel>1,4,7</reqlevel>
 		<var id="0">221,227,232,237,242,283,288,293,298,303,448,455,462,468,475,529,535,542,548,555,609,615,622,629,635,642,648,655</var>
@@ -36,11 +37,11 @@
 		<reqlevel>4</reqlevel>
 		<cooldown>6</cooldown>
 	</skill>
-	<skill name="Execution" row="1" col="2" startRanks="1" buyInCost="0" limit="1">
+	<skill name="Execution" row="1" col="2" startranks="1" buyInCost="0" limit="1">
 		<desc>Press special attack near a knocked down enemy to pummel them into the ground.\nPhysical Damage: 317%</desc>
 		<cooldown>3</cooldown>
 	</skill>
-	<skill name="Tumble" row="1" col="3" startRanks="1" buyInCost="0" limit="5">
+	<skill name="Tumble" row="1" col="3" startranks="1" buyInCost="0" limit="5">
 		<desc>Double-tap an arrow key or press [Shift] plus an arrow key to evade in that direction. Allows you to evade all attacks for a short time.\nCooldown: {0} sec</desc>
 		<reqlevel>1,11,21</reqlevel>
 		<var id="0">6,4.8,3.9,3.2,2.6</var>

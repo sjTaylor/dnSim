@@ -11,13 +11,14 @@ class Skill:
 		self.cooldown = None
 		self.reqlevel = None
 		self.buyInCost = 3
-		self.startRanks = 0
-		self.numRanks = 0
+		self.startranks = 0
+		self.numranks = 0
 		self.limit = 1
-		self.isUlt = False
+		self.isult = False
 		self.desc = "filler \\nskill name"
 		self.reqskills = None
 		self.vars = dict()
+		self.icons = None
 		if 'dataVersion' in root.attrib:
 			temp = root.attrib['dataVersion']
 			if temp == '1':
@@ -25,12 +26,12 @@ class Skill:
 		else:
 			self.initV1(root)
 	def getDesc(self):
-		if self.numRanks >= 1:
-			s1 = self.getText(self.desc,self.vars,self.numRanks-1)
-			s2 = self.getText(self.desc,self.vars,self.numRanks)
+		if self.numranks >= 1:
+			s1 = self.getText(self.desc,self.vars,self.numranks-1)
+			s2 = self.getText(self.desc,self.vars,self.numranks)
 		else:
-			s1 = self.getText(self.desc,self.vars,self.numRanks)
-			s2 = self.getText(self.desc,self.vars,self.numRanks+1)
+			s1 = self.getText(self.desc,self.vars,self.numranks)
+			s2 = self.getText(self.desc,self.vars,self.numranks+1)
 		
 		if s1 != s2:
 			return s1 + '\n' + '-'*15 + '\n' + s2
@@ -43,17 +44,19 @@ class Skill:
 		self.limit = int(attr['limit'])
 		self.desc = root.find('desc').text
 		
-		if 'isUlt' in attr:
-			self.isUlt = attr['isUlt'] == 'True'
-		if 'startRanks' in attr:
-			self.startRanks = int(attr['startRanks'])
-			self.numRanks=self.startRanks
+		if 'isult' in attr:
+			self.isult = attr['isult'] == 'True'
+		if 'startranks' in attr:
+			self.startranks = int(attr['startranks'])
+			self.numranks=self.startranks
 		if 'buyInCost' in attr:
 			self.buyInCost = int(attr['buyInCost'])
 		if root.find('duration') is not None:
 			self.duration = VarList(root.find('duration'))
 		if root.find('cooldown') is not None:
 			self.cooldown = VarList(root.find('cooldown'))
+		if root.find('icon') is not None:
+			self.icons = VarList(root.find('icon'))
 		
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
@@ -64,9 +67,9 @@ class Skill:
 			for x in root.find('reqskills').text.split(','):
 				self.reqskills.append(PreReq(x,self,self.classlevel))
 	def minimize(self):
-		self.numRanks = self.startRanks
+		self.numranks = self.startranks
 	def maximize(self):
-		self.numRanks = self.limit
+		self.numranks = self.limit
 	def getText(self, string, vars, level):
 		while string.find('{') >= 0:
 			start = string.find('{')
@@ -75,31 +78,36 @@ class Skill:
 		string = string.replace("\\n","\n")
 		return string
 	def rankUp(self):
-		self.numRanks = min(self.limit,self.numRanks+1)
+		self.numranks = min(self.limit,self.numranks+1)
 	def rankDown(self):
-		self.numRanks = max(self.startRanks,self.numRanks-1)
+		self.numranks = max(self.startranks,self.numranks-1)
 	def getreqlevel(self):
 		if self.reqlevel is None:
 			return 1
-		return self.reqlevel[self.numRanks]
+		return self.reqlevel[self.numranks]
 	def sp(self):
-		if self.numRanks > 0:
-			if self.numRanks > 1:
-				return self.buyInCost + self.numRanks - 1
+		if self.numranks > 0:
+			if self.numranks > 1:
+				return self.buyInCost + self.numranks - 1
 			return self.buyInCost
 		return 0
 	def getcd(self):
 		if self.cooldown is None:
 			return None
-		return self.cooldown[self.numRanks-1 if self.numRanks > 1 else 0]
+		return self.cooldown[self.numranks-1 if self.numranks > 1 else 0]
 	def levelreq(self):
-		if self.numRanks is self.limit:
+		if self.numranks is self.limit:
 			return None
 		rlevel = self.getreqlevel()
 		self.rankUp()
 		nspused = self.sp()
 		self.rankDown()
 		return [rlevel, nspused - self.sp()]
+
+	def geticon(self):
+		if self.icons is None:
+			return None
+		return self.icons[self.numranks]
 
 class VarList:
 	def __init__(self, node, type='nope'):
