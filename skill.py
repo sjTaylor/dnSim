@@ -1,4 +1,7 @@
 import re
+import xml.etree.ElementTree as ET
+import os
+
 class Skill:
 	"""The class used for holding, and processing, the data for skills"""
 	
@@ -57,6 +60,8 @@ class Skill:
 			self.cooldown = VarList(root.find('cooldown'))
 		if root.find('icon') is not None:
 			self.icons = VarList(root.find('icon'))
+		elif os.path.isfile('./icons/' + self.name.replace(' ','_') + '.jpg'):
+			self.icons = VarList(self.name.replace(' ','_') + '.jpg')
 		
 		for x in root.findall('var'):
 			self.vars[x.attrib['id']] = VarList(x)
@@ -113,15 +118,19 @@ class VarList:
 	def __init__(self, node, type='nope'):
 		self.predict = False
 		self.vals = []
-		if 'type' in node.attrib:
-			self.predict = node.attrib['type'] == 'yes'
+		if isinstance(node, ET.Element):
+			if 'type' in node.attrib:
+				self.predict = node.attrib['type'] == 'yes'
+			else:
+				self.predict = type == 'yes'
+			if self.predict:
+				for q in node.text.split(','):
+					self.vals.append(int(q))
+			else:
+				for q in node.text.split(','):
+					self.vals.append(q)
 		else:
-			self.predict = type == 'yes'
-		if self.predict:
-			for q in node.text.split(','):
-				self.vals.append(int(q))
-		else:
-			for q in node.text.split(','):
+			for q in node.split(','):
 				self.vals.append(q)
 	def __getitem__(self, dex):
 		if len(self.vals) is 0:

@@ -109,8 +109,8 @@ class ControlFrame(ttk.Frame):
 		self.classonebutton['text']   =self.pages[0].classname
 		self.classtwobutton['text']   =self.pages[1].classname
 		self.classthreebutton['text'] =self.pages[2].classname
-		self.pages[1].configure(bg='#CCFFFF')
-		self.pages[2].configure(bg='#ADFF5C')
+		#self.pages[1].configure(bg='#CCFFFF')
+		#self.pages[2].configure(bg='#ADFF5C')
 		self.dpane.switch=True
 	def skilltotal(self):
 		total = 0
@@ -222,7 +222,7 @@ class SkillDescFrame(ttk.Frame):
 class SkillButtonFrame(ttk.Frame):
 	#will be used to hold the skill buttons 
 	def __init__(self,master,xmlroot,dpane):
-		TK.Frame.__init__(self,master,bg='white')
+		TK.Frame.__init__(self,master,bg='black')
 		self.superclass=xmlroot.attrib['superclass']
 		self.classname=xmlroot.attrib['name']
 		self.classLevel=int(xmlroot.attrib['classLevel'])
@@ -262,7 +262,7 @@ class SkillButton(ttk.Frame):
 		if sk == None:
 			self.skill=None
 		else:
-			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60)
+			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60,bd=0)
 			self.button.grid(row=0)
 
 			self.ranklabel= TK.Label(self,text='',bg='gray',fg='white')

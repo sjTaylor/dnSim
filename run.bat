@@ -1,1 +1,1 @@
-START pythonw main.py
+python main.py
