@@ -151,8 +151,8 @@ class ControlFrame(ttk.Frame):
 					skill = skills[l][r][c].skill if skills[l][r][c] is not None else None
 					if skill is not None and skill.reqlevel is not None and skill.numranks > 0:
 						#checking for level requirements
-						if skill.getreqlevel() > self.level:
-							warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel()))
+						if skill.getreqlevel(False) > self.level:
+							warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel(False)))
 					if skill is not None and skill.reqskills is not None and skill.numranks > 0:
 						#Checking for the requisite skills
 						for pr in skill.reqskills:

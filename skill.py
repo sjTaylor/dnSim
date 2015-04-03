@@ -86,10 +86,14 @@ class Skill:
 		self.numranks = min(self.limit,self.numranks+1)
 	def rankDown(self):
 		self.numranks = max(self.startranks,self.numranks-1)
-	def getreqlevel(self):
+	def getreqlevel(self, forleveling=True):
 		if self.reqlevel is None:
 			return 1
-		return self.reqlevel[self.numranks]
+		if forleveling:
+			return self.reqlevel[self.numranks]
+		if self.numranks is 0:
+			return 1
+		return self.reqlevel[max(self.numranks-1,0)]
 	def sp(self):
 		if self.numranks > 0:
 			if self.numranks > 1:
