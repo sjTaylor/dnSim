@@ -5,7 +5,7 @@
 		<var id="0">121,125,128,131,135,150,153,156,159,163,178,181,184,188,191,206,209,213,216,219,234,238,241,244,247,263,266,269</var>
 		<var id="1">4,8,17,24,37,72,87,122,324,370,504,1275,1529,1813,3764,5608,6316,7037,7769,8514,10944,11919,12970,14109,15341,19236,20901,22706</var>
 		<var id="2">,,,,,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 1,\nMax Cooldown Charge: 2</var>
-		<icon>swift_cut.bmp</icon>
+		<icon>swift_cut.jpg</icon>
 		<cooldown>6</cooldown>
 	</skill>
 	<skill name="Piercing Star" row="0" col="1" startranks="1" buyInCost="0" limit="27">
