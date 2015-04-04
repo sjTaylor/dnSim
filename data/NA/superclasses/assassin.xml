@@ -53,6 +53,7 @@
 		<var id="0">254,258,263,267,271,307,312,316,320,325,361,365,369,374,378,414,418,423,427,431,467,472,476,480,485,489,493</var>
 		<var id="1">15,38,62,97,134,232,321,385,994,1151,3132,3749,4464,9191,10531,15358,17177,19037,20940,22884,29361,31976,34798,37836,41107,44632,48428</var>
 		<cooldown>12</cooldown>
+		<icon>fan_of_blades_gray.jpg,fan_of_blades.jpg</icon>
 	</skill>
 	<skill name="Shadow Hand" row="2" col="1" limit="26">
 		<desc>Sends illusions of yourself in all directions to create a powerful shock wave.\nHigh chance to destroy Super Armor\nPhysical Damage: {0}% + {1}\n\n{2}</desc>

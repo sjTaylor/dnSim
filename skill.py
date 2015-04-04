@@ -55,18 +55,23 @@ class Skill:
 		if 'buyInCost' in attr:
 			self.buyInCost = int(attr['buyInCost'])
 		if root.find('duration') is not None:
-			self.duration = VarList(root.find('duration'))
+			self.duration = VarList(node=root.find('duration'))
 		if root.find('cooldown') is not None:
-			self.cooldown = VarList(root.find('cooldown'))
+			self.cooldown = VarList(node=root.find('cooldown'))
 		if root.find('icon') is not None:
-			self.icons = VarList(root.find('icon'))
-		elif os.path.isfile('./icons/' + self.name.replace(' ','_') + '.jpg'):
-			self.icons = VarList(self.name.replace(' ','_') + '.jpg')
+			self.icons = VarList(node=root.find('icon'))
+		else: 
+			temparr = []
+			if os.path.isfile('./icons/' + self.name.replace(' ','_') + '_gray.jpg'):
+				temparr.append(self.name.replace(' ','_') + '_gray.jpg')
+			if os.path.isfile('./icons/' + self.name.replace(' ','_') + '.jpg'):
+				temparr.append(self.name.replace(' ','_') + '.jpg')
+			self.icons = VarList(arr=temparr)
 		
 		for x in root.findall('var'):
-			self.vars[x.attrib['id']] = VarList(x)
+			self.vars[x.attrib['id']] = VarList(node=x)
 		if root.find('reqlevel') is not None:
-			self.reqlevel=VarList(root.find('reqlevel'),'yes')
+			self.reqlevel=VarList(node=root.find('reqlevel'),type='yes')
 		if root.find('reqskills') != None:
 			self.reqskills = []
 			for x in root.find('reqskills').text.split(','):
@@ -119,23 +124,25 @@ class Skill:
 		return self.icons[self.numranks]
 
 class VarList:
-	def __init__(self, node, type='nope'):
+	def __init__(self, node=None,fromstr=None,arr=None, type='nope'):
 		self.predict = False
 		self.vals = []
-		if isinstance(node, ET.Element):
+		self.predict = type is 'yes'
+		if node is not None:
 			if 'type' in node.attrib:
 				self.predict = node.attrib['type'] == 'yes'
-			else:
-				self.predict = type == 'yes'
 			if self.predict:
 				for q in node.text.split(','):
 					self.vals.append(int(q))
 			else:
 				for q in node.text.split(','):
 					self.vals.append(q)
-		else:
+		elif fromstr is not None:
 			for q in node.split(','):
 				self.vals.append(q)
+		elif arr is not None:
+			self.vals=arr
+
 	def __getitem__(self, dex):
 		if len(self.vals) is 0:
 			return None

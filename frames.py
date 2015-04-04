@@ -276,9 +276,7 @@ class SkillButton(ttk.Frame):
 			self.button.bind('<Shift-Button-3>',self.shiftrclick)
 			self.button.bind('<Shift-Button-1>',self.shiftlclick)
 			self.bind('<Enter>',self.update)
-			if self.skill.geticon() is not None:
-				self.icon = ImageTk.PhotoImage(file='./icons/' + self.skill.geticon())
-				self.button.configure(image=self.icon,width=65,height=65)
+			self.seticon()
 			
 	def sp(self):
 		if self.skill==None:
@@ -301,9 +299,13 @@ class SkillButton(ttk.Frame):
 		self.skill.rankUp()
 		self.update()
 	def update(self,event=None):
-		#self.config(text=self.gettext())
 		self.descpane.touch(self.skill)
 		self.button['text']    = self.skill.name
 		self.ranklabel['text'] = str(self.skill.numranks) + '/' + str(self.skill.limit)
+		self.seticon()
 	def gettext(self):
 		return self.skill.name + "\n" + str(self.skill.numranks) + '/' + str(self.skill.limit)
+	def seticon(self):
+		if self.skill.geticon() is not None:
+				self.icon = ImageTk.PhotoImage(file='./icons/' + self.skill.geticon())
+				self.button.configure(image=self.icon,width=65,height=65)
