@@ -35,7 +35,11 @@ Anyways below is a list of things that need to be installed.
 1. Python 3.4 and tkinter which is bundled together in the windows installer on [python website](https://www.python.org/).
 2. you will need to install pillow (adds image support)  
 It was quite easy to install for me. In the command line I ran 
-`pip install Pillow`
+`pip install Pillow`  
+If that doesn't work you can [look here](https://pip.pypa.io/en/latest/installing.html) for  information on installing pip.  
+Note: on my windows 8 machine I had pip installed, but it didn't seem to be part of my path variable. So I used `/cygdrive/c/Python34/Scripts/pip.exe install Pillow` in cygwin or  
+`C:\Python34\Scripts\pip.exe install Pillow`  
+in the standard windows command prompt to install Pillow with pip
 
 ##TODO:
 
