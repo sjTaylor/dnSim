@@ -16,7 +16,7 @@ Right click to rank down
 
 shift-click to maximize, and minimize ranks
 
-specialization selector on the right will allow you to see all classes, or classes individually.
+specialization selector on the left will allow you to see all classes, or classes individually.
 This is so that smaller monitors (hopefully) don't have an issue. 
 
 Ctrl-r to reset skill selection (sets all to minimum possible ranks)
