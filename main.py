@@ -3,6 +3,7 @@ author: Stuart Taylor
 """
 #elwakjfhlakwerhalkwjflakwbfalwrajfe
 #lsdjfksldjfskdfjklsdjfklsjdflsdkl
+#comments are cool
 import xml.etree.ElementTree as ET
 import skill as SK
 import frames as FR
