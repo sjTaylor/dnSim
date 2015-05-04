@@ -23,9 +23,9 @@ Ctrl-r to reset skill selection (sets all to minimum possible ranks)
 
 ##Commiting Changes
 
-For instructions on how to contribute to the project look in the docs folder.
+I recommend you take a look at [this guide](https://guides.github.com/activities/forking/index.html) since making pull requests is probably going to be most common way to contribute to the project. There are also [some other guides](https://guides.github.com/) on the github website which you might find useful.
 
-specifically how_to_commit.txt and format_descriptons.xml
+It is also possible to edit files in your browser on the github website. If you want to do this I recommend you make the changes on your computer so you can test to see if they work and do what you want them to, and then just copy and paste into the browser.
 
 ##Installation
 
