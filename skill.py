@@ -11,6 +11,7 @@ class Skill:
 		self.name = "filler_name"
 		self.row = 0
 		self.col = 0
+		self.spreq = 0
 		self.duration = None
 		self.cooldown = None
 		self.reqlevel = None
@@ -48,6 +49,14 @@ class Skill:
 		self.limit = int(attr['limit'])
 		self.desc = root.find('desc').text
 		
+		if 'spreq' in attr:
+			self.spreq= int(attr['spreq'])
+		elif self.classlevel > 0:
+			if self.classlevel == 2:
+				self.spreq=65
+			else:
+				self.spreq = self.row*5 + 20
+
 		if 'isult' in attr:
 			self.isult = attr['isult'] == 'True'
 		if 'startranks' in attr:
@@ -123,6 +132,10 @@ class Skill:
 		if self.icons is None:
 			return None
 		return self.icons[self.numranks]
+	def enoughsp(self):
+		if self.classlevel is 0 or self.spreq is 0:
+			return True
+		return config.control.nums[self.classlevel-1] >= self.spreq
 
 class VarList:
 	def __init__(self, node=None,fromstr=None,arr=None, type='nope'):

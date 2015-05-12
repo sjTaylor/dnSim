@@ -39,7 +39,7 @@
 		<reqlevel>70</reqlevel>
 		<reqskills>1:4:0</reqskills>
 	</skill>
-	<skill name="Sunshine Spark+" row='5' col='1' limit="1" buyInCost="2">
+	<skill name="Sunshine Spark+" row='5' col='1' limit="1" buyInCost="2" spreq="0">
 		<desc>Chakra sphere explodes repeatedly, dealing 50% damage. Deals an additional 50% damage when it explodes a the end of its flight.</desc>
 		<reqlevel>80</reqlevel>
 		<reqskills>2:1:0</reqskills>

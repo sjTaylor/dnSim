@@ -151,28 +151,31 @@ class ControlFrame(ttk.Frame):
 				for c in range(0,len(skills[l][r])):
 					result = None
 					skill = skills[l][r][c].skill if skills[l][r][c] is not None else None
-					if skill is not None and skill.reqlevel is not None and skill.numranks > 0:
-						#checking for level requirements
-						if skill.getreqlevel(False) > self.level:
-							warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel(False)))
-					if skill is not None and skill.reqskills is not None and skill.numranks > 0:
-						#Checking for the requisite skills
-						for pr in skill.reqskills:
-							otherskill=skills[pr.classlevel][pr.row][pr.col].skill
-							if otherskill is not None:
-								if otherskill.numranks < pr.numranks:
-									if not skill.isult:
-										warnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
+					if skill is not None and skill.numranks > 0:
+						if not skill.enoughsp():
+							warnings.append(skill.name + ': requires ' + str(skill.spreq) + ' SP total from prev class')
+						if skill.reqlevel is not None:
+							#checking for level requirements
+							if skill.getreqlevel(False) > self.level:
+								warnings.append(skill.name + ' requires level ' + str(skill.getreqlevel(False)))
+						if skill.reqskills is not None:
+							#Checking for the requisite skills
+							for pr in skill.reqskills:
+								otherskill=skills[pr.classlevel][pr.row][pr.col].skill
+								if otherskill is not None:
+									if otherskill.numranks < pr.numranks:
+										if not skill.isult:
+											warnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
+										else:
+											ultwarnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
+										result=False
 									else:
-										ultwarnings.append(skill.name + ': needs '+str(pr.numranks)+' rank(s) in ' + otherskill.name)
-									result=False
+										result = True if result == None else result
 								else:
-									result = True if result == None else result
-							else:
-								print('None requirement found')
-						if skill.isult:
-							ults.append(skills[l][r][c])
-							bools.append(result)
+									print('None requirement found')
+							if skill.isult:
+								ults.append(skills[l][r][c])
+								bools.append(result)
 		#ults need to be checked separately
 		#since one ult can be the requirement for the other one
 		for i in range(0,len(ults)):

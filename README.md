@@ -45,17 +45,17 @@ in the standard windows command prompt to install Pillow with pip
 
 * after 1 data set is complete get other people involved to finish data aquisition
 
-* [skill,lvl]program in a conflict detection system (not enough sp, too low a level, etc)
-
 * [partial]improve description box (cooldown, reqlevel, name, sp requirements, etc)
 
 * add importing feature
 
-*  make class selector use class name attribute in file
+* make class selector use class name attribute in file
 
 * generally make it look nicer
 
 ##Done
+
+* program in a conflict detection system (not enough sp, too low a level, etc)
 
 * Make the level set button propogate changes in max sp spent (hovering onto skills does this currently)
 
