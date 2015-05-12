@@ -11,7 +11,9 @@ from tkinter import ttk
 import os
 
 def skillreset(event):
-	controlFrame.skillreset()
+	config.resetting=True
+	config.control.skillreset()
+	config.resetting=False
 '''
 	add in an update to ctrl to fix the screen when reset
 '''
