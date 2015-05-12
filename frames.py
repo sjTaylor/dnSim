@@ -8,7 +8,9 @@ from tkinter import ttk
 
 import snip
 import os
-from PIL import Image, ImageTk
+
+if config.image:
+	from PIL import Image, ImageTk
 
 class ControlFrame(ttk.Frame):
 	def __init__(self,master):
