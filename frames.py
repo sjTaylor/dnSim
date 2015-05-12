@@ -281,17 +281,21 @@ class SkillButton(ttk.Frame):
 			config.update()
 	def shiftrclick(self, event):
 		self.skill.minimize()
+		self.prod()
 		config.update()
 	def shiftlclick(self, event):
 		self.skill.maximize()
+		self.prod()
 		config.update()
 	def rClick(self,event):
 		self.skill.rankDown()
+		self.prod()
 		config.update()
 	def lClick(self,event):
 		self.skill.rankUp()
+		self.prod()
 		config.update()
-	def prod(self,event):
+	def prod(self,event=None):
 		config.descpane.touch(self.skill)
 	def update(self):
 		self.button['text']    = self.skill.name
