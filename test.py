@@ -1,6 +1,6 @@
 from tkinter import *
 
-
+'''
 counter = 0
 
 def update():
@@ -20,3 +20,11 @@ menubar.add_cascade(label="Test", menu=menu)
 
 root.config(menu=menubar)
 root.mainloop()
+'''
+thing = {}
+thing['one'] = '#1'
+thing['two'] = '#2'
+thing['three'] = '#3'
+
+for x in thing:
+	print(x)

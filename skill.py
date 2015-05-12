@@ -1,3 +1,4 @@
+import config
 import re
 import xml.etree.ElementTree as ET
 import os

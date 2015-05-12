@@ -53,11 +53,11 @@ in the standard windows command prompt to install Pillow with pip
 
 *  make class selector use class name attribute in file
 
-* Make the level set button propogate changes in max sp spent (hovering onto skills does this currently)
-
 * generally make it look nicer
 
 ##Done
+
+* Make the level set button propogate changes in max sp spent (hovering onto skills does this currently)
 
 * finish data files for a complete class
 
