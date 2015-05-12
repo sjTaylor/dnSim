@@ -100,7 +100,6 @@ class ControlFrame(ttk.Frame):
 		for s in temp:
 			self.classDropdown['menu'].add_command(label=s,command=TK._setit(self.classVar,s))
 	def classchange(self,arg1,arg2,arg3):
-		config.descpane.switch=False
 		while len(self.pages) > 0:
 			self.pages[0].grid_remove()
 			del self.pages[0]
@@ -114,7 +113,6 @@ class ControlFrame(ttk.Frame):
 		self.classonebutton['text']   =self.pages[0].classname
 		self.classtwobutton['text']   =self.pages[1].classname
 		self.classthreebutton['text'] =self.pages[2].classname
-		config.descpane.switch=True
 		config.update()
 	def skilltotal(self):
 		total = 0
@@ -135,10 +133,8 @@ class ControlFrame(ttk.Frame):
 		self.warninglabel['text']=text
 
 	def skillreset(self):
-		config.descpane.switch=False
 		for i in self.pages:
 			i.skillreset()
-		config.descpane.switch=True
 		config.update()
 	def validate(self):
 		warnings = []
@@ -204,7 +200,6 @@ class SkillDescFrame(ttk.Frame):
 							justify=TK.LEFT,wraplength=self.w*7,
 							anchor='nw',bg='white')
 		self.textbox.grid(column=0,row=1,sticky='wne')
-		self.switch=False
 		self.grid(column=1,row=0,sticky='nsw')
 
 	def touch(self,skill):
@@ -220,11 +215,8 @@ class SkillDescFrame(ttk.Frame):
 			temp += self.line + '\n'
 
 		self.textbox['text']=temp + skill.getDesc()
-		if self.switch:
-			config.control.skilltotal()
 
 class SkillButtonFrame(ttk.Frame):
-	#will be used to hold the skill buttons 
 	def __init__(self,master,xmlroot):
 		TK.Frame.__init__(self,master,bg='black')
 		self.superclass=xmlroot.attrib['superclass']
@@ -271,7 +263,6 @@ class SkillButton(ttk.Frame):
 			self.ranklabel.grid(row=1)
 
 			self.skill = SK.Skill(sk,cl)
-			#config.update()
 			self.button.bind('<Button-3>',self.rClick)
 			self.button.bind('<Button-1>',self.lClick)
 			self.button.bind('<Shift-Button-3>',self.shiftrclick)
@@ -286,7 +277,8 @@ class SkillButton(ttk.Frame):
 	def minimize(self):
 		if self.skill != None:
 			self.skill.minimize()
-		config.update()
+		if not config.resetting:
+			config.update()
 	def shiftrclick(self, event):
 		self.skill.minimize()
 		config.update()
