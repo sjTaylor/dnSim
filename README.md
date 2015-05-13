@@ -23,7 +23,8 @@ Ctrl-r to reset skill selection (sets all to minimum possible ranks)
 
 ##Commiting Changes
 
-I recommend you take a look at [this guide](https://guides.github.com/activities/forking/index.html) since making pull requests is probably going to be most common way to contribute to the project. There are also [some other guides](https://guides.github.com/) on the github website which you might find useful.
+I recommend you take a look at [this guide](https://guides.github.com/activities/forking/index.html) since making pull requests is probably going to be most common way to contribute to the project. You might also be interested in [this guide](https://help.github.com/articles/syncing-a-fork/) if you want to keep your fork updated with the master branch.  
+There are also [some other guides](https://guides.github.com/) on the github website which you might find useful.
 
 It is also possible to edit files in your browser on the github website. If you want to do this I recommend you make the changes on your computer so you can test to see if they work and do what you want them to, and then just copy and paste into the browser.
 
@@ -33,11 +34,11 @@ With the addition of skill icon support it seems that more than the standard win
 Anyways below is a list of things that need to be installed.
 
 1. Python 3.4 and tkinter which is bundled together in the windows installer on [python website](https://www.python.org/).
-2. you will need to install pillow (adds image support)  
+2. While not mandatory you'll probably want to install Pillow for image support 
 It was quite easy to install for me. In the command line I ran 
 `pip install Pillow`  
 If that doesn't work you can [look here](https://pip.pypa.io/en/latest/installing.html) for  information on installing pip.  
-Note: on my windows 8 machine I had pip installed, but it didn't seem to be part of my path variable. So I used `/cygdrive/c/Python34/Scripts/pip.exe install Pillow` in cygwin or  
+Note: on my windows 8 machine I had pip installed, but it didn't seem to be part of my path variable. So I used
 `C:\Python34\Scripts\pip.exe install Pillow`  
 in the standard windows command prompt to install Pillow with pip
 
