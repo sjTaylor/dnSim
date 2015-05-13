@@ -1,4 +1,4 @@
-
+#image can be changed to False to disable skill icons
 image=True
 control=None
 skillpane=None
