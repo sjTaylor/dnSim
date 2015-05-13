@@ -43,9 +43,7 @@ in the standard windows command prompt to install Pillow with pip
 
 ##TODO:
 
-* after 1 data set is complete get other people involved to finish data aquisition
-
-* [partial]improve description box (cooldown, reqlevel, name, sp requirements, etc)
+* get other people involved to finish data aquisition
 
 * add importing feature
 
@@ -53,7 +51,11 @@ in the standard windows command prompt to install Pillow with pip
 
 * generally make it look nicer
 
+* move more settings to config.py
+
 ##Done
+
+* improve description box (cooldown, reqlevel, name, sp requirements, etc)
 
 * program in a conflict detection system (not enough sp, too low a level, etc)
 

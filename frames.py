@@ -206,6 +206,8 @@ class SkillDescFrame(ttk.Frame):
 		self.header['text']=skill.name
 		temp = 'Skill Rank : ' + str(skill.numranks) + '\n'
 		temp += 'cooldown : ' + str(skill.getcd())  + '\n' if skill.getcd() is not None else ''
+		if skill.spreq is not 0:
+			temp += 'sp required : ' + str(skill.spreq) + '\n'
 		temp += self.line + '\n'
 		if skill.levelreq() is not None:
 			t = skill.levelreq()
