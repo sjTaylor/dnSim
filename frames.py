@@ -109,7 +109,7 @@ class ControlFrame(ttk.Frame):
 		while self.pages[0].superclass != 'none':
 			self.pages.insert(0,SkillButtonFrame(config.skillpane,ET.parse(self.dir+'superclasses/'+self.pages[0].superclass).getroot()))
 		for i in range(0,len(self.pages)):
-			self.pages[i].grid(column=i,row=0,sticky='ns')
+			self.pages[i].grid(column=i,row=0,sticky='nsew')
 		self.classonebutton['text']   =self.pages[0].classname
 		self.classtwobutton['text']   =self.pages[1].classname
 		self.classthreebutton['text'] =self.pages[2].classname
@@ -220,10 +220,11 @@ class SkillDescFrame(ttk.Frame):
 
 class SkillButtonFrame(ttk.Frame):
 	def __init__(self,master,xmlroot):
-		TK.Frame.__init__(self,master,bg='black')
+		TK.Frame.__init__(self,master)
 		self.superclass=xmlroot.attrib['superclass']
 		self.classname=xmlroot.attrib['name']
 		self.classLevel=int(xmlroot.attrib['classLevel'])
+		self.configure(bg=config.skillpagebg[self.classLevel])
 		self.skills=snip.twoD(int(xmlroot.attrib['numRows']),int(xmlroot.attrib['numCols']),None)
 		for i in xmlroot:
 			r = int(i.attrib['row'])
@@ -252,16 +253,16 @@ class SkillButtonFrame(ttk.Frame):
 					y.update()
 
 class SkillButton(ttk.Frame):
-	buttonbg=config.buttonbg
+	#buttonbg=config.buttonbg
 	def __init__(self, master,cl,sk=None):
-		TK.Frame.__init__(self,master,width=8,height=4,bg='gray')
+		TK.Frame.__init__(self,master,width=8,height=4,bg=config.buttonrankbg)
 		if sk == None:
 			self.skill=None
 		else:
 			self.button= TK.Button(self,command=None,width=8,height=4,wraplength=60,bd=0)
 			self.button.grid(row=0)
 
-			self.ranklabel= TK.Label(self,text='',bg='gray',fg='white')
+			self.ranklabel= TK.Label(self,text='',bg=config.buttonrankbg,fg=config.buttonrankfontcolor)
 			self.ranklabel.grid(row=1)
 
 			self.skill = SK.Skill(sk,cl)
