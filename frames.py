@@ -9,6 +9,8 @@ from tkinter import ttk
 import snip
 import os
 
+import re
+
 if config.image:
 	from PIL import Image, ImageTk
 
@@ -94,7 +96,7 @@ class ControlFrame(ttk.Frame):
 		dir = './data/' + self.serverVar.get()
 		temp = []
 		for x in os.listdir(dir):
-			if os.path.isfile(dir +'/'+ x):
+			if os.path.isfile(dir +'/'+ x) and re.match('.+[.]xml',x):
 				temp.append(x)
 		self.classDropdown['menu'].delete(0,'end')
 		for s in temp:
