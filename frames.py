@@ -102,6 +102,8 @@ class ControlFrame(ttk.Frame):
 		for s in temp:
 			self.classDropdown['menu'].add_command(label=s,command=TK._setit(self.classVar,s))
 	def classchange(self,arg1,arg2,arg3):
+		if self.classVar.get() == 'filler':
+			return
 		while len(self.pages) > 0:
 			self.pages[0].grid_remove()
 			del self.pages[0]
