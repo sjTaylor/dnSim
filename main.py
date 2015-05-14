@@ -27,7 +27,7 @@ root.bind('<Control-Key-r>',skillreset)
 
 #frame for skill boxes
 config.skillpane = TK.Frame(root)
-config.skillpane.grid(column=1,row=0)
+config.skillpane.grid(column=1,row=0,sticky='nsew')
 #config.updatelist['skills']=config.skillpane.update
 
 #skill description frame
