@@ -1,0 +1,47 @@
+<class name="Light Fury" superclass="taoist.xml" classLevel="2" numRows="6" numCols="2" dataVersion="1">
+	<skill name="Miraculous Chakra" row='0' col='0' limit="4">
+		<desc>Shoots a miraculous Chakra toward your allies that restores HP constantly for a short period of time.\nEach Healing Chakra:\nRestores {0}%+{1} Physical Damage for the skill's user Activates a healing Chakra once every 1 sec\nDuration: 3 sec</desc>
+		<reqlevel>45,55</reqlevel>
+		<reqskills>1:5:0</reqskills>
+		<var id="0">75,98,121,145,168</var>
+		<var id="1">20250,30250,42250,56250,72250</var>
+		<cooldown>60</cooldown>
+	</skill>
+	<skill name="Sunshine Spark" row='1' col='0' limit="11">
+		<desc>Manifest a giant ball of concentrated Chakra to blast through enemies, causing continuous damage. When the ball hits ground, it will explode to deal critical damage to all surrounding enemies, and temporarily lower enemy defenses\nCan be used while jumping\nLight Magic\nPhysical Damage: {0}% + {1}\nBlast Damage (per hit): 5%\nEnemy Damage Taken: +25%\nDuration: 10 sec</desc>
+		<reqlevel>50,53</reqlevel>
+		<reqskills>n</reqskills>
+		<var id="0">1257,1301,1346,1390,1435,1645,1689,1734,1778,1823,2032,2077</var>
+		<var id="1">15648,17396,19254,21218,23303,36108,39641,43506,47738,52355,73335,80218</var>
+		<cooldown>30</cooldown>
+	</skill>
+	<skill name="Outbreak +" row='1' col='1' limit="1">
+		<reqskills>1:0:0:6</reqskills>
+		<desc>Increases the damage of Outbreak's last hit. Use the special attack button after you evade to throw a Chakra that deals extra damage before you smash down on the enemy.\nStrike Damage: +30%\nChakra Damage: 80% of Outbreak damage</desc>
+		<reqlevel>47</reqlevel>
+	</skill>
+	<skill name="Energetic Chakra +" row='2' col='1' limit="1" buyInCost="0">
+		<desc>Enhances Energetic Chakra to heal up to 3 people and increase their movement speed.\nMovement Speed: +50%</desc>
+		<reqlevel>55</reqlevel>
+		<reqskills>n,1:1:0:1</reqskills>
+	</skill>
+	<skill name="Strike Ring +" row='3' col='1' limit="1" buyInCost="0">
+		<desc>Increases Strike Ring's attack range and damage.\nStrike Ring Damage: +30%</desc>
+		<reqskills>1:3:0</reqskills>
+		<reqlevel>60</reqlevel>
+	</skill>
+	<skill name="Enhanced Light Chakra" row='4' col='0' limit="1" buyInCost="1">
+		<desc>Enhances light chakra skills and Light Attack. Outbreak and Miraculous Chakra deal more Physical Damage.\nLight Attack: +10%\nPhysical Damage: +10%\nDuration: 10 sec</desc>
+		<reqlevel>65</reqlevel>
+	</skill>
+	<skill name="Healing Chakra +" row='4' col='1' limit="1" buyInCost="2">
+		<desc>Enhances Healing Chakra's damage reduction effect. Press the regular attack button during Healing Chakra to shoot a Sunshine Spark.\nDamage Taken by Target: -50%</desc>
+		<reqlevel>70</reqlevel>
+		<reqskills>1:4:0</reqskills>
+	</skill>
+	<skill name="Sunshine Spark+" row='5' col='1' limit="1" buyInCost="2" spreq="0">
+		<desc>Chakra sphere explodes repeatedly, dealing 50% damage. Deals an additional 50% damage when it explodes a the end of its flight.</desc>
+		<reqlevel>80</reqlevel>
+		<reqskills>2:1:0</reqskills>
+	</skill>
+</class>

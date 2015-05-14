@@ -9,6 +9,8 @@ from tkinter import ttk
 import snip
 import os
 
+import re
+
 if config.image:
 	from PIL import Image, ImageTk
 
@@ -94,12 +96,14 @@ class ControlFrame(ttk.Frame):
 		dir = './data/' + self.serverVar.get()
 		temp = []
 		for x in os.listdir(dir):
-			if os.path.isfile(dir +'/'+ x):
+			if os.path.isfile(dir +'/'+ x) and re.match('.+[.]xml',x):
 				temp.append(x)
 		self.classDropdown['menu'].delete(0,'end')
 		for s in temp:
 			self.classDropdown['menu'].add_command(label=s,command=TK._setit(self.classVar,s))
 	def classchange(self,arg1,arg2,arg3):
+		if self.classVar.get() == 'filler':
+			return
 		while len(self.pages) > 0:
 			self.pages[0].grid_remove()
 			del self.pages[0]
