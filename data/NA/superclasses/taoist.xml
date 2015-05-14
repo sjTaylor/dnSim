@@ -59,7 +59,7 @@
 		<reqlevel>24,27</reqlevel>
 		<reqskills>n</reqskills>
 		<var id="0">10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26</var>
-		<cooldown>10</cooldown>
+		<cooldown>30</cooldown>
 	</skill>
 	<skill name="Chakra Punch" row='2' col='1' limit="1" buyInCost="1">
 		<desc>Press the (Special Attack Button) while tumbling to land on the ground and punch an enemy.\nPhysical Damage 100%</desc>
