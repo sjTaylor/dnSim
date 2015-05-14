@@ -1,0 +1,1 @@
+I put the classes here as place-holders for the EU and SEA servers to demonstrate how to do classes for other servers. I realize that currently (as far as I know) EU is still in the 70 cap, and that the SEA server tends to have different translations for the skills than NA.
