@@ -4,10 +4,12 @@ The goal of this project is to creat a data-driven skill simulator for Eyedentit
 
 Use and files in this repository at your own risk.
 
-Software is provided as is.
+Software is provided as is. General disclaimer stuff.
 
 ##How to use:
-
+###Starting the program
+To start the program double click `main.py` to open it. You can also start it with `r.bat` or `run.bat` but the latter will keep a command prompt open until the program closes (which is good if you want to report a bug).
+###Using the program
 Select server, then select class.
 
 Left click to rank up
@@ -21,6 +23,10 @@ This is so that smaller monitors (hopefully) don't have an issue.
 
 Ctrl-r to reset skill selection (sets all to minimum possible ranks)
 
+###configuring/settings
+
+The `config.py` file has a few options you can change. I'll be adding more options to it in the future.
+
 ##Commiting Changes
 
 I recommend you take a look at [this guide](https://guides.github.com/activities/forking/index.html) since making pull requests is probably going to be most common way to contribute to the project. You might also be interested in [this guide](https://help.github.com/articles/syncing-a-fork/) if you want to keep your fork updated with the master branch.  
@@ -30,10 +36,13 @@ It is also possible to edit files in your browser on the github website. If you 
 
 ##Installation
 
-With the addition of skill icon support it seems that more than the standard windows binary for 3.4 needs to be installed. 
-Anyways below is a list of things that need to be installed.
+1. Download the dnSim project (button on the right that says 'Download ZIP')
+2. Extract the files to somewhere on your computer
+3. Install any dependencies you are missing
 
-1. Python 3.4 and tkinter which is bundled together in the windows installer on [python website](https://www.python.org/).
+###Dependencies
+
+1. Python 3.4 and tkinter which is bundled together in the windows installer on the [python website](https://www.python.org/).
 2. While not mandatory you'll probably want to install Pillow for image support 
 It was quite easy to install for me. In the command line I ran 
 `pip install Pillow`  
