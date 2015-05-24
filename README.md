@@ -6,6 +6,8 @@ Use and files in this repository at your own risk.
 
 Software is provided as is. General disclaimer stuff.
 
+It seems **[I was beaten to finishing a simulator](http://dnss.herokuapp.com/)** so for now I'm abandoning this project
+
 ##How to use:
 ###Starting the program
 To start the program double click `main.py` to open it. You can also start it with `r.bat` or `run.bat` but the latter will keep a command prompt open until the program closes (which is good if you want to report a bug).
